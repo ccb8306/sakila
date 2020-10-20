@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/auth/IndexServlet");
 			return;
 		}
-		// 오늘 접속자 수 출력
+		// 오늘 접속자 수 폼에 넘겨주기
 		statsService = new StatsService();
 		Stats stats = statsService.getStats();
 		request.setAttribute("stats", stats);

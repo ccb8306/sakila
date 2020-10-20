@@ -11,10 +11,11 @@ public class StatsService {
 	private StatsDao statsDao;
 	
 	// 오늘 날짜가 있는지 확인하는 메서드
+	// 오늘 날짜가 db에 없으면 null을 반환함
 	public Stats getStats() {
 		statsDao = new StatsDao();
-		Stats stats = new Stats();
-		Stats returnStats = new Stats();
+		Stats stats = new Stats(); // 오늘 날짜를 넣는 용도의 Stats
+		Stats returnStats = new Stats(); // 반환 값을 넣는 용도의 Stats
 		
 		// db 접속 정보
 		final String URL = "jdbc:mariadb://localhost:3306/sakila";
@@ -31,9 +32,10 @@ public class StatsService {
 			// stats에 오늘 날짜 추가
 			stats = getToday();
 
-			//디버깅
-			System.out.println(stats.getDay() + "<--stats.today");
-			// 쿼리 실행
+			// 디버깅
+			System.out.println(stats.getDay() + "<--getStats() today");
+			
+			// 오늘 날짜와 카운트를 반환 변수에 넣음
 			returnStats = statsDao.selectDay(conn, stats);
 			
 			// 커밋
@@ -58,7 +60,8 @@ public class StatsService {
 		return returnStats;
 	}
 	
-	// 방문자 숫자 카운팅
+	// 방문자 숫자 카운트
+	// db에 오늘 날짜가 있는지 확인 후 없으면 오늘 날짜를 생성 후 카운트 있으면 카운트만 해줌.
 	public void countStats() {
 		Stats stats = new Stats();
 		statsDao = new StatsDao();
@@ -75,7 +78,7 @@ public class StatsService {
 			// 오토커밋 false
 			conn.setAutoCommit(false); 
 
-			// db에서 오늘 날짜를 가져옴
+			// db에서 오늘 날짜가 있는지 확인함
 			stats = getStats();
 			
 			// 오늘 날짜가 db에 없을 경우
