@@ -38,5 +38,10 @@ public class test {
 			"JOIN rental r ON r.customer_id = c.customer_id WHERE r.rental_date IS NULL"; 
 	// 신규 회원 등록
 	public static final String INSERT_CUSTOMER = "INSERT INTO customer(store_id, first_name, last_name, email, address_id, create_date) VALUES(?,?,?,?,?,now())";
-
+	// 회원 상세보기
+	public static final String SELECT_CUSTOMER_ONE = "SELECT * FROM customer_list WHERE ID=?;";
+	// 해당 회원의 연체 리스트
+	public static final String SELECT_CUSTOMER_DELAY = "SELECT r.customer_id, r.rental_id, r.rental_date,  DATE_ADD(r.rental_date,INTERVAL f.rental_duration DAY) AS 반납예정일 " + 
+			"FROM rental r JOIN inventory i ON r.inventory_id = i.inventory_id JOIN film f ON i.film_id = f.film_id WHERE r.customer_id = 200 AND r.return_date IS NULL";
+	
 }
