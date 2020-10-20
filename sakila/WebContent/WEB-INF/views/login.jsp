@@ -39,9 +39,9 @@
 <body>
 <div style="margin-top:200px"></div>
 <div style="width:500px" class="container form-group">
-	<h2 class="align-center">로그인 폼</h2>
-	<h6 class="align-center">오늘 접속자 수 : ${stats.count}명</h6>	
-
+	<h1 style="height:50px; background-color: #666666" class="align-center">L O G I N</h1>
+	<h6 class="align-center">오늘 접속자 수 : ${todayStats.cnt}명</h6>
+	<h6 class="align-center">총 접속자 수 : ${totalCnt}명</h6>		
 	<form id="loginForm">
 		<table class="table table-borderless">			
 			<tr>		
@@ -50,7 +50,7 @@
 			</tr>
 			<tr>		
 				<td><i class='fas fa-key' style='font-size:36px; color:gray'></i></td>
-				<td><input class="form-control" type="password" placeholder="pw" id="pw"></tr>
+				<td><input class="form-control" type="password" placeholder="password" id="pw"></tr>
 			</tr>
 			<tr>
 				<td colspan="2"><button class="btn btn-block btn-outline-dark" id="btn" type="button">Log-In</button></td>

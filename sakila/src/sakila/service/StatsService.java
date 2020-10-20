@@ -3,6 +3,8 @@ package sakila.service;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import sakila.common.DBUtil;
 import sakila.dao.StatsDao;
@@ -13,48 +15,50 @@ public class StatsService {
 	
 	// 오늘 날짜가 있는지 확인하는 메서드
 	// 오늘 날짜가 db에 없으면 null을 반환함
-	public Stats getStats() {
+	public Map<String, Object> getStats() {
+		Map<String, Object> map = null;
 		statsDao = new StatsDao();
-		Stats stats = new Stats(); // 오늘 날짜를 넣는 용도의 Stats
-		Stats returnStats = new Stats(); // 반환 값을 넣는 용도의 Stats
+		Stats todayStats = new Stats();
 		Connection conn = null; 	
 		
 		try {
 			// db 연결
 			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
-			// 오토커밋 false
-			conn.setAutoCommit(false); 
+		
+			conn.setAutoCommit(false); // 오토커밋 false
+			todayStats = getToday(); // stats에 오늘 날짜 추가
+			todayStats = statsDao.selectDay(conn, todayStats); // 오늘 날짜와 카운트
 
-			// stats에 오늘 날짜 추가
-			stats = getToday();
-
+			int totalCnt = statsDao.selectTotalCnt(conn); // 전체 접속자 수
+			
 			// 디버깅
-			System.out.println(stats.getDay() + "<--getStats() today");
+			System.out.println(todayStats.getDay() + "<--getStats().todayStats Day");
+			System.out.println(todayStats.getCnt() + "<--getStats().todayStats Cnt");
+			System.out.println(totalCnt + "<--getStats() totalCnt");		
+
+			// map
+			map = new HashMap<String, Object>();
+			map.put("todayStats",todayStats);
+			map.put("totalCnt", totalCnt);
 			
-			// 오늘 날짜와 카운트를 반환 변수에 넣음
-			returnStats = statsDao.selectDay(conn, stats);
-			
-			// 커밋
-			conn.commit(); 
+			conn.commit(); // 커밋
 		}catch (Exception e) {
 			try {
-				// 롤백
-				conn.rollback(); 
+				conn.rollback(); // 롤백 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		}finally {
 			try {
-				// close
-				conn.close(); 
+				conn.close(); // close
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		return returnStats;
+		return map;
 	}
 	
 	// 방문자 숫자 카운트
@@ -68,11 +72,13 @@ public class StatsService {
 			// db 연결
 			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
-			// 오토커밋 false
-			conn.setAutoCommit(false); 
+			conn.setAutoCommit(false); // 오토커밋 false
 
-			// db에서 오늘 날짜가 있는지 확인함
-			stats = getStats();
+			stats = getToday(); // stats에 오늘 날짜 추가
+			stats = statsDao.selectDay(conn, stats); // db에서 오늘 날짜가 있는지 확인함
+
+			System.out.println(stats.getDay() + "<--countStats().stats Day");
+			System.out.println(stats.getCnt() + "<--countStats().stats Cnt");
 			
 			// 오늘 날짜가 db에 없을 경우
 			if(stats == null) {
@@ -87,20 +93,17 @@ public class StatsService {
 				statsDao.updateStats(conn, stats);
 			}
 			
-			// 커밋
-			conn.commit(); 
+			conn.commit(); // 커밋
 		}catch (Exception e) {
 			try {
-				// 롤백
-				conn.rollback(); 
+				conn.rollback(); // 롤백
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		}finally {
 			try {
-				// close
-				conn.close(); 
+				conn.close(); // close
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -116,6 +119,9 @@ public class StatsService {
 		// stats에 오늘 날짜 추가
 		Stats stats = new Stats();
 		stats.setDay(day);
+		
+		// 디버깅
+		System.out.println(stats.getDay() + "<--getToday() today");
 		
 		return stats;
 	}

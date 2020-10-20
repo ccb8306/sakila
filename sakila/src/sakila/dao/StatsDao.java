@@ -7,7 +7,6 @@ import sakila.vo.Stats;
 import sakila.query.*;
 
 public class StatsDao {
-	
 	// 오늘 날짜가 있는지
 	public Stats selectDay(Connection conn, Stats stats) throws Exception{
 		Stats returnStats = null;
@@ -22,7 +21,7 @@ public class StatsDao {
 		if(rs.next()) {
 			returnStats = new Stats();
 			returnStats.setDay(rs.getString("day"));
-			returnStats.setCount(rs.getInt("count"));
+			returnStats.setCnt(rs.getInt("cnt"));
 		}
 		
 		return returnStats;
@@ -48,5 +47,19 @@ public class StatsDao {
 		stmt.executeUpdate();
 	}
 	
+	// 전체 접속자 수 구하기
+	public int selectTotalCnt(Connection conn) throws Exception{
+		int total = 0;
+		PreparedStatement stmt = conn.prepareStatement(StatsQuery.SELECT_TOTAL_STATS);
+		//디버깅
+		System.out.println(stmt + "<--selectTotalCnt stmt");
+		
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			total = rs.getInt("SUM(cnt)");
+		}
+		
+		return total;
+	}
 	
 }
