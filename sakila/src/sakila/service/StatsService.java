@@ -4,6 +4,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import sakila.common.DBUtil;
 import sakila.dao.StatsDao;
 import sakila.vo.Stats;
 
@@ -16,15 +17,11 @@ public class StatsService {
 		statsDao = new StatsDao();
 		Stats stats = new Stats(); // 오늘 날짜를 넣는 용도의 Stats
 		Stats returnStats = new Stats(); // 반환 값을 넣는 용도의 Stats
-		
-		// db 접속 정보
-		final String URL = "jdbc:mariadb://localhost:3306/sakila";
-		final String USER = "root";
-		final String PASSWORD = "java1004";
 		Connection conn = null; 	
 		
 		try {
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			// db 연결
+			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
 			// 오토커밋 false
 			conn.setAutoCommit(false); 
@@ -65,15 +62,11 @@ public class StatsService {
 	public void countStats() {
 		Stats stats = new Stats();
 		statsDao = new StatsDao();
-
-		// db 접속 정보
-		final String URL = "jdbc:mariadb://localhost:3306/sakila";
-		final String USER = "root";
-		final String PASSWORD = "java1004";
 		Connection conn = null; 	
 		
 		try {
-			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			// db 연결
+			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
 			// 오토커밋 false
 			conn.setAutoCommit(false); 
