@@ -77,7 +77,6 @@ public class StatsService {
 			stats = getToday(); // stats에 오늘 날짜 추가
 			stats = statsDao.selectDay(conn, stats); // db에서 오늘 날짜가 있는지 확인함
 
-
 			// 오늘 날짜가 db에 없을 경우
 			if(stats == null) {
 				// 오늘 날짜를 db에 추가, count + 1
@@ -90,6 +89,8 @@ public class StatsService {
 				System.out.println("오늘 날짜 있음");
 				statsDao.updateStats(conn, stats);
 			}
+			
+			// 디버깅
 			System.out.println(stats.getDay() + "<--countStats().stats Day");
 			System.out.println(stats.getCnt() + "<--countStats().stats Cnt");
 			

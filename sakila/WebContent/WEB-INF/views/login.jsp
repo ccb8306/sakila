@@ -12,10 +12,10 @@
 <script>
 	$(document).ready(function() {	
 		$("#btn").click(function() {	
-			if ($("#email").val().length < 1) {
-				alert("이메일을 입력해주세요");
+			if ($("#id").val().length < 1) {
+				alert("아이디를 입력해주세요");
 				return;
-			}
+			} 
 			else if ($("#pw").val() < 1) {
 				alert("비밀번호를 입력해주세요");
 				return;
@@ -42,15 +42,15 @@
 	<h1 style="height:50px; background-color: #666666" class="align-center">L O G I N</h1>
 	<h6 class="align-center">오늘 접속자 수 : ${todayStats.cnt}명</h6>
 	<h6 class="align-center">총 접속자 수 : ${totalCnt}명</h6>		
-	<form id="loginForm">
+	<form method="post" action="${pageContext.request.contextPath}/LoginServlet" id="loginForm">
 		<table class="table table-borderless">			
 			<tr>		
 				<td style="width:10%"><i class='fas fa-user-alt' style='font-size:36px; color:gray'></i></td> 
-				<td><input class="form-control" type="text" placeholder="email" id="email"></td>
+				<td><input class="form-control" type="text" placeholder="id" name="id" id="id"></td>
 			</tr>
 			<tr>		
 				<td><i class='fas fa-key' style='font-size:36px; color:gray'></i></td>
-				<td><input class="form-control" type="password" placeholder="password" id="pw"></tr>
+				<td><input class="form-control" type="password" placeholder="password" name="pw" id="pw"></tr>
 			</tr>
 			<tr>
 				<td colspan="2"><button class="btn btn-block btn-outline-dark" id="btn" type="button">Log-In</button></td>
