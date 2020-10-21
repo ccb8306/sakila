@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 		if(returnStaff == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			System.out.println("로그인 실패");
+			
 		// 로그인 성공 -> 세션에 아이디 저장, 메인 페이지로 이동
 		}else {
 			session.setAttribute("loginStaff", returnStaff.getStaffId());

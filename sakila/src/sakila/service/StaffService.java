@@ -8,15 +8,15 @@ import sakila.dao.StaffDao;
 import sakila.vo.Staff;
 
 public class StaffService {
-	// 로그인
+	// 로그인 
 	public Staff getStaffByKey(Staff staff) {
 		Staff returnStaff = null;
-		DBUtil dbUtil = new DBUtil();
 		StaffDao staffDao = null;
 		Connection conn =  null;
 		
 		try {
-			conn = dbUtil.getConnection(); // connection
+			conn = DBUtil.getConnection(); // connection
+			conn.setAutoCommit(false);//오토커밋 사용 안함
 			staffDao = new StaffDao();
 			
 			// 인증 확인 -> 결과 저장

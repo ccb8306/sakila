@@ -10,4 +10,5 @@ public class StatsQuery {
 	// 오늘 날짜가 있을시 -- > cnt + 1
 	public final static String UPDATE_STATS = "UPDATE stats SET cnt=cnt+1 WHERE day=?";
 	
+	
 }	
