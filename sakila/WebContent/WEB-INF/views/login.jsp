@@ -12,8 +12,8 @@
 <script>
 	$(document).ready(function() {	
 		$("#btn").click(function() {	
-			if ($("#id").val().length < 1) {
-				alert("아이디를 입력해주세요");
+			if ($("#email").val().length < 1) {
+				alert("이메일을 입력해주세요");
 				return;
 			} 
 			else if ($("#pw").val() < 1) {
@@ -46,7 +46,7 @@
 		<table class="table table-borderless">			
 			<tr>		
 				<td style="width:10%"><i class='fas fa-user-alt' style='font-size:36px; color:gray'></i></td> 
-				<td><input class="form-control" type="text" placeholder="id" name="id" id="id"></td>
+				<td><input class="form-control" type="text" placeholder="email" name="email" id="email"></td>
 			</tr>
 			<tr>		
 				<td><i class='fas fa-key' style='font-size:36px; color:gray'></i></td>

@@ -12,7 +12,7 @@ public class StaffDao {
 	public Staff selectStaffByKey(Connection conn, Staff staff) throws Exception {
 		Staff returnStaff = null;
 		PreparedStatement stmt = conn.prepareStatement(StaffQuery.SELECT_STAFF_BY_KEY);
-		stmt.setInt(1, staff.getStaffId());
+		stmt.setString(1, staff.getEmail());
 		stmt.setString(2, staff.getPassword());
 		
 		System.out.println(stmt + "<--selectStaffByKey stmt");
@@ -20,8 +20,8 @@ public class StaffDao {
 		
 		if(rs.next()) {
 			returnStaff = new Staff();
-			returnStaff.setStaffId(rs.getInt("staff_id"));
-			returnStaff.setPassword(rs.getString("username"));
+			returnStaff.setEmail(rs.getString("email"));
+			returnStaff.setUsername(rs.getString("username"));
 		}
 		
 		return returnStaff;

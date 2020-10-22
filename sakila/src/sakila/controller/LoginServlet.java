@@ -15,7 +15,7 @@ import sakila.service.StatsService;
 import sakila.vo.Staff;
 import sakila.vo.Stats;
 
-@WebServlet("/LoginServlet")
+@WebServlet({"/","/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 	private StatsService statsService;
 	private StaffService staffService;
@@ -46,12 +46,12 @@ public class LoginServlet extends HttpServlet {
 		staffService = new StaffService();
 		
 		// 디버깅
-		System.out.println(request.getParameter("id") + "<--request id");
+		System.out.println(request.getParameter("email") + "<--request email");
 		System.out.println(request.getParameter("pw") + "<--request pw");
 		
 		// 로그인 정보 받아오기, staff에 정보 저장
 		Staff staff = new Staff();
-		staff.setStaffId(Integer.parseInt(request.getParameter("id")));
+		staff.setEmail(request.getParameter("email"));
 		staff.setPassword(request.getParameter("pw"));
 		
 		// 서비스에서 인증 결과 받아오기
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 			
 		// 로그인 성공 -> 세션에 아이디 저장, 메인 페이지로 이동
 		}else {
-			session.setAttribute("loginStaff", returnStaff.getStaffId());
+			session.setAttribute("loginStaff", returnStaff);
 			response.sendRedirect(request.getContextPath() + "/auth/IndexServlet");
 			System.out.println(returnStaff.getStaffId() + "<--로그인 성공");
 		}

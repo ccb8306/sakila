@@ -8,6 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-staffId : ${staffId}
+	<h1>login.jsp</h1>
+	<div>
+		<span>${loginstaff.username}</span>관리자님
+	</div>
+	<div>
+		<a href="${pageContext.request.contextPath}/auth/LogoutServlet">로그아웃</a>
+	</div>
 </body>
 </html>
