@@ -46,11 +46,11 @@
 		<table class="table table-borderless">			
 			<tr>		
 				<td style="width:10%"><i class='fas fa-user-alt' style='font-size:36px; color:gray'></i></td> 
-				<td><input class="form-control" type="text" placeholder="email" name="email" id="email"></td>
+				<td><input class="form-control" type="text" placeholder="email" name="email" id="email" value="Mike.Hillyer@sakilastaff.com"></td>
 			</tr>
 			<tr>		
 				<td><i class='fas fa-key' style='font-size:36px; color:gray'></i></td>
-				<td><input class="form-control" type="password" placeholder="password" name="pw" id="pw"></tr>
+				<td><input class="form-control" type="password" placeholder="password" name="pw" id="pw" value="1234"></tr>
 			</tr>
 			<tr>
 				<td colspan="2"><button class="btn btn-block btn-outline-dark" id="btn" type="button">Log-In</button></td>
