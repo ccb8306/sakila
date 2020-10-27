@@ -13,14 +13,21 @@
 	.align-center{text-align: center;}
 	.align-left{text-align: left;}
 	.align-right{text-align: right;}
+	.vertical-middle{vertical-align: middle;}
+	.vertical-top{vertical-align: top;}
+	.vertical-bottom{vertical-align: bottom;}
+	.color-black{color: black;}
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="row">
+		<!-- 메뉴 -->
 		<div class="col-sm-3" style="background-color:#F08080">
 		<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 		</div>
+		
+		<!-- index -->
 		<div class="col-sm-9">
 			<div style="margin-top:30px"></div>
 			<div>

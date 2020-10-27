@@ -26,7 +26,6 @@ public class StatsService {
 			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
 		
-			conn.setAutoCommit(false); // 오토커밋 false
 			todayStats = getToday(); // stats에 오늘 날짜 추가
 			todayStats = statsDao.selectDay(conn, todayStats); // 오늘 날짜와 카운트
 
@@ -72,7 +71,6 @@ public class StatsService {
 			// db 연결
 			conn = DBUtil.getConnection();
 			System.out.println("db connection 성공");
-			conn.setAutoCommit(false); // 오토커밋 false
 
 			stats = getToday(); // stats에 오늘 날짜 추가
 			stats = statsDao.selectDay(conn, stats); // db에서 오늘 날짜가 있는지 확인함

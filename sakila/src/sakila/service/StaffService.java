@@ -16,7 +16,6 @@ public class StaffService {
 		
 		try {
 			conn = DBUtil.getConnection(); // connection
-			conn.setAutoCommit(false);//오토커밋 사용 안함
 			staffDao = new StaffDao();
 			
 			// 인증 확인 -> 결과 저장

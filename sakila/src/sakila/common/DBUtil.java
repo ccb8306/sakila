@@ -8,6 +8,7 @@ public class DBUtil {
 		final String DB_ID = "root";
 		final String DB_PW = "java1004";
 		final Connection conn = DriverManager.getConnection(DB_ADDR,DB_ID,DB_PW);	
+		conn.setAutoCommit(false);
 		return conn;
 	}
 }
