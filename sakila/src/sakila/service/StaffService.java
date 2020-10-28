@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import sakila.common.DBUtil;
 import sakila.dao.StaffDao;
 import sakila.vo.Staff;
+import sakila.vo.StaffAndStaffList;
 
 public class StaffService {
 	// 로그인 
@@ -39,5 +40,37 @@ public class StaffService {
 		
 		// 인증 결과 반환
 		return returnStaff;
+	}
+	
+	// 직원 정보 상세보기
+	public StaffAndStaffList getStaffOne(Staff staff) {
+		StaffAndStaffList sasl = null;
+		StaffDao staffDao = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBUtil.getConnection();			
+			sasl = new StaffAndStaffList();
+			staffDao = new StaffDao();
+			
+			sasl = staffDao.selectStaffOne(conn, staff);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return sasl;
 	}
 }

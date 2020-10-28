@@ -8,32 +8,23 @@
 <!-- 구글 CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 
-<style>
-	.align-center{text-align: center;}
-	.align-left{text-align: left;}
-	.align-right{text-align: right;}
-	.vertical-middle{vertical-align: middle;}
-	.vertical-top{vertical-align: top;}
-	.vertical-bottom{vertical-align: bottom;}
-	.color-black{color: black;}
-</style>
 </head>
 <body>
 <div class="container">
 	<div class="row">
 		<!-- 메뉴 -->
-		<div class="col-sm-3" style="background-color:#F08080">
+		<div class="col-sm-3">
 		<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 		</div>
 		
 		<!-- Rental List -->
-		<div class="col-sm-9" style="margin-top:30px">
+		<div class="col-sm-9 bg-white" style="margin-top:50px; margin-bottom: 50px">
 			<div>
-				<h1>영화 반납</h1>
+				<h2>영화 반납</h2>
 				<hr>
 			</div>
 			
@@ -47,7 +38,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>대여 아이디</th>
+							<th>대여 ID</th>
 							<th>영화 제목</th>
 							<th>대여일</th>
 							<th>대여일수</th>

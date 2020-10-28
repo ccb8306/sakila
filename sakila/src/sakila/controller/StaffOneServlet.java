@@ -8,17 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/auth/IndexServlet")
-public class IndexServlet extends HttpServlet {   
+import sakila.service.StaffService;
+import sakila.vo.*;
+
+@WebServlet("/auth/StaffOneServlet")
+public class StaffOneServlet extends HttpServlet {
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		// 스태프 아이디를 index.jsp에 보내줌
-		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
-		request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
+		Staff staff = new Staff();
+		staff = (Staff) session.getAttribute("loginStaff");
+		StaffService staffService = new StaffService();
+		StaffAndStaffList sasl = new StaffAndStaffList();
+		sasl = staffService.getStaffOne(staff);
 		
+		request.setAttribute("sasl", sasl);
+		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
+		request.getRequestDispatcher("/WEB-INF/views/auth/staffOne.jsp").forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
