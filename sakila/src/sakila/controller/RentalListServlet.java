@@ -53,7 +53,7 @@ public class RentalListServlet extends HttpServlet {
 		// 최대 페이지를 보냄
 		request.setAttribute("endPage", endPage);
 		
-		request.getRequestDispatcher("/WEB-INF/views/auth/rentalList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/auth/rental/rentalList.jsp").forward(request, response);
 	}
 
 	

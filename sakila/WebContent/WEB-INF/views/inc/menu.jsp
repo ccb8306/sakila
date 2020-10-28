@@ -29,27 +29,27 @@
 		<div style="margin-top:30px">
 			<a href="${pageContext.request.contextPath}/auth/IndexServlet" class="color-black">HOME</a>
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="${pageContext.request.contextPath}/auth/RentalListServlet" class="color-black">영화 반납</a>
 		</div>
 		<hr>
-		<div>
-			<a href="" class="color-black">회원목록 관리</a>
+		<div style="margin-top:10px">	
+			<a href="${pageContext.request.contextPath}/auth/CustomerListServlet" class="color-black">회원목록 관리</a>
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="" class="color-black">영화목록 관리</a>	
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="" class="color-black">영화재고 관리</a>	
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="" class="color-black">영화 출연배우 등록</a>	
 			<hr>
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="" class="color-black">매장 통계</a>	
 		</div>
-		<div>
+		<div style="margin-top:10px">
 			<a href="" class="color-black">MVP</a>	
 		</div>
 	</div>

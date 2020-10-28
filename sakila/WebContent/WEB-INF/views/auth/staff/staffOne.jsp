@@ -10,18 +10,18 @@
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="container">
+<div class="container-fluid pt-3">
 	<div class="row">
 		<!-- 메뉴 -->
 		<div class="col-sm-3">
 		<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 		</div>
 		
-		<!-- index -->
-		<div class="col-sm-9 bg-white" style="margin-top:50px; margin-bottom: 50px">
+		<!-- staffOne -->
+		<div class="col-sm-9 bg-white mt-5 mb-5">
 			<table class="table table-borderless">	
 				<tr>
-					<th style="width: 25%"><h2>관리자 정보</h2></th>
+					<th style="width: 25%"><h2 class="mt-2">관리자 정보</h2></th>
 					<td class="align-right"><a class="btn btn-outline-dark" href="">정보 수정</a></td>
 				</tr>
 				<tr><td colspan="2"><hr></td></tr>

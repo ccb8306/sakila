@@ -10,7 +10,7 @@
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="container">
+<div class="container-fluid pt-3">
 	<div class="row">
 		<!-- 메뉴 -->
 		<div class="col-sm-3">
@@ -18,8 +18,8 @@
 		</div>
 		
 		<!-- index -->
-		<div class="col-sm-9 bg-white" style="margin-top:50px; margin-bottom: 50px">
-			<div>
+		<div class="col-sm-9 bg-white mt-5 mb-5">
+			<div class="mt-3">
 				<h2>Index</h2>
 				<hr>
 			</div>
