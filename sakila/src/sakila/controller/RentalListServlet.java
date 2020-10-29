@@ -46,8 +46,6 @@ public class RentalListServlet extends HttpServlet {
 		
 		// 대여 리스트를 뷰에 보내줌
 		request.setAttribute("rentalList", rentalList);
-		// 스태프 아이디를 뷰에 보내줌
-		request.setAttribute("loginstaff", session.getAttribute("loginStaff"));
 		// 현재 페이지를 보냄
 		request.setAttribute("currentPage", currentPage);
 		// 최대 페이지를 보냄

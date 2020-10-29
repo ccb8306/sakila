@@ -58,5 +58,60 @@ public class RentalDao {
 		}	
 		return endPage;
 	}
-	
+	// 한 고객의 연체 리스트
+	public List<RentalAndFilm> selectCustomerOverDueList(Connection conn , int customerId)throws Exception{
+		List<RentalAndFilm> list = new ArrayList<RentalAndFilm>();
+		RentalAndFilm raf = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_CUSTOMER_RENTAL_LIST);
+		stmt.setInt(1, customerId);
+		
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Rental rental = new Rental();
+			Film film = new Film();
+			raf = new RentalAndFilm();
+			
+			film.setTitle(rs.getString("f.title"));
+			rental.setRentalId(rs.getInt("r.rental_id"));
+			rental.setRentalDate(rs.getString("r.rental_date"));
+			rental.setReturnDueDate(rs.getString("return_due_date"));
+			
+			raf.setFilm(film);
+			raf.setRental(rental);
+			
+			list.add(raf);
+		}
+		
+		return list;
+	}
+		
+	// 한 고객의 대여 리스트
+	public List<RentalAndFilm> selectCustomerRentalList(Connection conn , int customerId)throws Exception{
+		List<RentalAndFilm> list = new ArrayList<RentalAndFilm>();
+		RentalAndFilm raf = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_CUSTOMER_RENTAL_LIST);
+		stmt.setInt(1, customerId);
+		System.out.println(stmt + "<--selectCustomerRentalList stmt");
+		
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Rental rental = new Rental();
+			Film film = new Film();
+			raf = new RentalAndFilm();
+			
+			film.setTitle(rs.getString("f.title"));
+			rental.setRentalId(rs.getInt("r.rental_id"));
+			rental.setRentalDate(rs.getString("r.rental_date"));
+			rental.setReturnDate(rs.getString("r.return_date"));
+			
+			raf.setFilm(film);
+			raf.setRental(rental);
+			
+			list.add(raf);
+		}
+		
+		return list;
+	}
 }

@@ -9,7 +9,7 @@ public class CustomerList {
 	private String city;
 	private String country;
 	private String notes;
-	private String sid;
+	private int sid;
 	
 	public int getId() {
 		return id;
@@ -59,10 +59,10 @@ public class CustomerList {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	public String getSid() {
+	public int getSid() {
 		return sid;
 	}
-	public void setSid(String sid) {
+	public void setSid(int sid) {
 		this.sid = sid;
 	}
 	

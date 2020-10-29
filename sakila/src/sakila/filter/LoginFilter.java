@@ -34,6 +34,8 @@ public class LoginFilter implements Filter {
 			return;
 		}
 		
+		// 세션을 auth폴더의 뷰에게 보내줌
+		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
 		chain.doFilter(request, response);
 	}
 

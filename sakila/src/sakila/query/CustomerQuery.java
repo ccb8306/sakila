@@ -7,4 +7,8 @@ public class CustomerQuery {
 			" WHERE cl.SID=? ORDER BY cl.ID ASC LIMIT ?, ?";
 	// 고객 전체 리스트 개수
 	public final static String SELECT_CUSTOMER_LIST_COUNT = "SELECT COUNT(*) FROM customer_list WHERE SID=?";
+	
+	// 고객 상세보기
+	public final static String SELECT_CUSTOMER_ONE = "SELECT cl.ID, cl.SID,cl.name,cl.phone,cl.address,cl.city,cl.country,cl.notes,c.email,c.create_date FROM customer_list cl JOIN customer c ON cl.ID=c.customer_id WHERE cl.ID=?";
+	
 }

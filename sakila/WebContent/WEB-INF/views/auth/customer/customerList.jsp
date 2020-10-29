@@ -60,7 +60,7 @@
 					<tbody>
 						<c:forEach var="item" items="${list}">
 							<tr>
-								<td><a href="">${item.id}</a></td>
+								<td><a href="${pageContext.request.contextPath}/auth/CustomerOneServlet?customerId=${item.id}">${item.id}</a></td>
 								<td>${item.name}</td>
 								<td>${item.address}</td>
 								<td>${item.phone}</td>

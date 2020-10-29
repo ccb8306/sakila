@@ -24,7 +24,6 @@ public class StaffOneServlet extends HttpServlet {
 		sasl = staffService.getStaffOne(staff);
 		
 		request.setAttribute("sasl", sasl);
-		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
 		request.getRequestDispatcher("/WEB-INF/views/auth/staff/staffOne.jsp").forward(request, response);
 	}
 

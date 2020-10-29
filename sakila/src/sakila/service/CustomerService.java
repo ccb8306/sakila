@@ -49,4 +49,39 @@ public class CustomerService {
 		
 		return map;
 	}
+	// 고객 상세보기(고객 정보)
+	public Map<String, Object> getCustomerOne(int customerId){
+		Map<String, Object> map = null;
+		Connection conn = null;
+		CustomerDao customerDao = null;
+		CustomerAndCustomerList cacl = null;
+		
+		try {
+			map = new HashMap<String, Object>();
+			customerDao = new CustomerDao();
+			conn = DBUtil.getConnection();
+			cacl = new CustomerAndCustomerList();
+			
+			cacl = customerDao.selectCustomerOne(conn, customerId);
+			
+			map.put("cacl", cacl);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return map;
+	}
 } 

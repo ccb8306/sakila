@@ -15,4 +15,9 @@ public class RentalQuery {
 	
 	// 영화 반납하기
 	public final static String UPDATE_RENTAL_RETURN_DATE = "UPDATE FROM rental SET return_date=now() WHERE rental_id=?";
+	
+	// 한 고객의 연체 리스트
+	public final static String SELECT_CUSTOMER_OVERDUE_LIST = "SELECT f.title, r.customer_id, r.rental_id, r.rental_date,  DATE_ADD(r.rental_date,INTERVAL f.rental_duration DAY) AS return_due_date FROM rental r JOIN inventory i ON r.inventory_id = i.inventory_id JOIN film f ON i.film_id = f.film_id WHERE r.customer_id = ? AND r.return_date IS NULL"; 
+	// 한 고객의 정상 대여 리스트
+	public final static String SELECT_CUSTOMER_RENTAL_LIST = "SELECT f.title, r.customer_id, r.rental_id, r.rental_date, r.return_date FROM rental r JOIN inventory i ON r.inventory_id = i.inventory_id JOIN film f ON i.film_id = f.film_id WHERE r.customer_id = ? AND r.return_date IS NOT NULL"; 
 }

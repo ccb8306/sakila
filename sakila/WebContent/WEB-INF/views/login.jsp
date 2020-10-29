@@ -25,16 +25,9 @@
 	});
 </script>
 
-<!-- bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-<!-- style -->
-<style>
-	.align-left{text-align:left;}
-	.align-center{text-align:center;}
-	.align-right{text-align:right;}
-</style>
+<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div style="margin-top:200px"></div>

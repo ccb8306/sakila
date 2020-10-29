@@ -47,7 +47,6 @@ public class CustomerListServlet extends HttpServlet {
 		endPage = (Integer)map.get("endPage");
 		
 		// 뷰에 값들 보내주기
-		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("endPage", endPage);

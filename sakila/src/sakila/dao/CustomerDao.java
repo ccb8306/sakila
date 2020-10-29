@@ -54,4 +54,36 @@ public class CustomerDao {
 		}
 		return endPage;
 	}
+	
+	// 고객 정보 상세보기
+	public CustomerAndCustomerList selectCustomerOne(Connection conn, int customerId)throws Exception {
+		CustomerAndCustomerList cacl = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(CustomerQuery.SELECT_CUSTOMER_ONE);
+		stmt.setInt(1, customerId);
+		System.out.println(stmt + "<--selectCustomerOne stmt");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			cacl = new CustomerAndCustomerList();
+			Customer c = new Customer();
+			CustomerList cl = new CustomerList();
+
+			cl.setId(rs.getInt("cl.ID"));
+			cl.setSid(rs.getInt("cl.SID"));
+			cl.setName(rs.getString("cl.name"));
+			cl.setPhone(rs.getString("cl.phone"));
+			cl.setAddress(rs.getString("cl.address"));
+			cl.setCity(rs.getString("cl.city"));
+			cl.setCountry(rs.getString("cl.country"));
+			cl.setNotes(rs.getString("cl.notes"));
+			c.setEmail(rs.getString("c.email"));
+			
+			cacl.setCustomer(c);
+			cacl.setCustomerList(cl);
+		}
+		
+		return cacl;
+	}
 }

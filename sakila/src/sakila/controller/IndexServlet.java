@@ -11,10 +11,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/auth/IndexServlet")
 public class IndexServlet extends HttpServlet {   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
-		// 스태프 아이디를 index.jsp에 보내줌
-		request.setAttribute("loginStaff", session.getAttribute("loginStaff"));
 		request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 		
 	}

@@ -5,6 +5,7 @@
 	<div>
 		<h1 class="align-center"><a href="${pageContext.request.contextPath}/auth/IndexServlet" class="color-black">Sakila Movie</a></h1>
 	</div>
+	
 	<!-- 사용자 -->
 	<div style="margin-top: 50px">
 		<div class="row align-center">
@@ -17,10 +18,12 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- 로그아웃 -->
 	<div style="margin-top:20px">
 		<a class="btn btn-block btn-outline-dark" href="${pageContext.request.contextPath}/auth/LogoutServlet">Log-out</a>
 	</div>
+	
 	<!-- 메뉴 -->
 	<div style="margin-top:80px">
 		<div>
