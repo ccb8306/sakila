@@ -10,7 +10,7 @@
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-main">
-<div class="container-fluid pt-3">
+<div class="container-fluid wrap pt-3">
 	<div class="row">
 		<!-- 메뉴 -->
 		<div class="col-sm-3">
@@ -20,7 +20,7 @@
 		<!-- index -->
 		<div class="col-sm-9 bg-white mt-5 mb-5">
 			<div class="mt-3">
-				<h2>Index</h2>
+				<h2><br></h2>
 				<hr>
 			</div>
 			<div>
@@ -28,6 +28,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="over align-center">
+	<br><h1 class="font-lotte-H">Index</h1>
 </div>
 </body>
 </html>

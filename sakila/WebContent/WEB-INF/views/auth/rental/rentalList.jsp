@@ -14,7 +14,7 @@
 
 </head>
 <body class="body-main">
-<div class="container-fluid pt-3">
+<div class="container-fluid wrap pt-3">
 	<div class="row">
 		<!-- 메뉴 -->
 		<div class="col-sm-3">
@@ -24,7 +24,7 @@
 		<!-- Rental List -->
 		<div class="col-sm-9 bg-white mt-5 mb-5">
 			<div class="mt-3">
-				<h2>영화 반납</h2>
+				<h2><br></h2>
 				<hr>
 			</div>
 			
@@ -94,6 +94,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="over align-center">
+	<br><h1 class="font-lotte-H">대여 목록</h1>
 </div>
 </body>
 </html>

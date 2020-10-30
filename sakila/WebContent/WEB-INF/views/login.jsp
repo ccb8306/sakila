@@ -29,10 +29,12 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
-<body class="body-main">
-<div style="margin-top:200px"></div>
-<div style="width:500px" class="container form-group">
-	<h1 style="height:50px; background-color: #666666" class="align-center">L O G I N</h1>
+<body>
+<div style="margin-top:80px"></div>
+<div style="height:210px; background-color: #444444;" class="container-fluid">
+	<br><br><p class="align-center color-white fs-80">L O G I N</p>
+</div>
+<div style="width:500px" class="container form-group mt-4">
 	<h6 class="align-center">오늘 접속자 수 : ${todayStats.cnt}명</h6>
 	<h6 class="align-center">총 접속자 수 : ${totalCnt}명</h6>		
 	<form method="post" action="${pageContext.request.contextPath}/LoginServlet" id="loginForm">

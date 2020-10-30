@@ -1,15 +1,51 @@
-.body-main{margin:0; background-color:#FAECC5; width:100%; height:100%;}
-.container-fluid{width:90%;}
+@charset "utf-8";
+@font-face {
+  font-family: 'LotteMartHappy';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 300;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+}
+@font-face{
+    font-family: 'NotoSans';
+    font-weight: 400;
+    font-style: normal;
+    font-display:swap;
+    src: url('https://s1.pearlcdn.com/pearlabyss/contents/fonts/notosanskr-regular2.eot'); src: local('※'),
+            url('https://s1.pearlcdn.com/pearlabyss/contents/fonts/notosanskr-regular2.woff2') format('woff2'),
+            url('https://s1.pearlcdn.com/pearlabyss/contents/fonts/notosanskr-regular2.woff') format('woff'),
+            url('https://s1.pearlcdn.com/pearlabyss/contents/fonts/notosanskr-regular2.otf') format('opentype'),
+            url('https://s1.pearlcdn.com/pearlabyss/contents/fonts/notosanskr-regular2.svg') format('svg');
+}
+   
+.body-main{margin:0; background-color:#FFF7EF; width:100%; height:100%;}
+
+.wrap{width:90%; position:relative;}
+.over{position:absolute; top:3%; left:26%; width: 15%; height: 11%; background-color: #FFFFCC; box-shadow: 3px 3px 3px 1px gray;}
+.col-sm-9{box-shadow : 5px 5px 5px 5px gray;}
+.text-shadow{text-shadow: 3px 3px #000;}
+
 .align-center{text-align: center;}
 .align-left{text-align: left;}
 .align-right{text-align: right;}
+
 .vertical-middle{vertical-align: middle;}
 .vertical-top{vertical-align: top;}
 .vertical-bottom{vertical-align: bottom;}
+
 .color-black{color: black;}
+.color-white{color: white;}
+.color-title{color:#FDFFC7; text-decoration : none! important; }
+
 .bg-white{background-color:white;}
 .bg-lightgray{background-color:#eeeeee;}
 .bg-gray{background-color:gray;}
+
 .mt-1{margin-top:10px;}
 .mt-2{margin-top:20px;}
 .mt-3{margin-top:30px;}
@@ -22,3 +58,21 @@
 .mb-4{margin-bottom:40px;}
 .mb-5{margin-bottom:50px;}
 .mb-6{margin-bottom:60px;}
+
+.font-lotte-H{font-family: 'LotteMartHappy'}
+.font-lotte-D{font-family: 'LotteMartDream'}
+.font-NotoSans{font-family: 'NotoSans'}
+
+.fs-small{font-size:6px;}
+.fs-middle{font-size:17px;}
+.fs-large{font-size:30px;}
+.fs-10{font-size:10px;}
+.fs-15{font-size:15px;}
+.fs-20{font-size:20px;}
+.fs-25{font-size:25px;}
+.fs-30{font-size:30px;}
+.fs-35{font-size:35px;}
+.fs-40{font-size:40px;}
+.fs-45{font-size:45px;}
+.fs-50{font-size:50px;}
+.fs-80{font-size:80px;}
