@@ -13,7 +13,7 @@
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body>
+<body class="body-main">
 <div class="container-fluid pt-3">
 	<div class="row">
 		<!-- 메뉴 -->

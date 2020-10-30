@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="body-main">
 <div style="margin-top:200px"></div>
 <div style="width:500px" class="container form-group">
 	<h1 style="height:50px; background-color: #666666" class="align-center">L O G I N</h1>

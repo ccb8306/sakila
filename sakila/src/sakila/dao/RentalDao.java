@@ -63,7 +63,7 @@ public class RentalDao {
 		List<RentalAndFilm> list = new ArrayList<RentalAndFilm>();
 		RentalAndFilm raf = null;
 		
-		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_CUSTOMER_RENTAL_LIST);
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_CUSTOMER_OVERDUE_LIST);
 		stmt.setInt(1, customerId);
 		
 		ResultSet rs = stmt.executeQuery();

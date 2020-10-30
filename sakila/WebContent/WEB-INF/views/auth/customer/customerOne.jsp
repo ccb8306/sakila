@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="body-main">
 <div class="container-fluid pt-3">
 	<div class="row">
 		<!-- 메뉴 -->
@@ -60,7 +60,9 @@
 			<!-- 연체 목록 -->
 			<div>
 				<div><h4>연체 목록</h4></div>
-			
+				<div>
+					<iframe width="100%" height="300px" src="${pageContext.request.contextPath}/auth/CustomerOverDueListServlet?customerId=${cacl.customerList.id}"></iframe>
+				</div>
 			</div>
 		</div>
 			

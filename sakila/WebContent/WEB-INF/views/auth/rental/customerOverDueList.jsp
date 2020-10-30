@@ -18,14 +18,15 @@
 				<th>대여 번호</th>
 				<th>영화 이름</th>
 				<th>대여일</th>
-				<th>반납일</th>
+				<th>반납 예정일</th>
+				<th>연채액</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
 				<c:when test="${empty list}">
 					<tr>
-						<td class="align-center" colspan="5">대여 기록이 없습니다.</td>
+						<td class="align-center" colspan="5">연체가 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -34,11 +35,13 @@
 							<td>${item.rental.rentalId}</td>
 							<td>${item.film.title}</td>
 							<td>${item.rental.rentalDate}</td>
-							<td>${item.rental.returnDate}</td>
+							<td>${item.rental.returnDueDate}</td>
+							<td>0.00</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
+			
 		</tbody>
 	</table>
 </div>
