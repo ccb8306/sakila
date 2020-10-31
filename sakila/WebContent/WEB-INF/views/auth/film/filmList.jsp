@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>customerList</title>
+<title>filmList</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
@@ -17,26 +18,25 @@
 			<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 		</div>
 		
-		<!-- customerList -->
+		<!-- 영화 관리 -->
 		<div class="col-sm-9 bg-white mt-5 mb-5">
 			<div class="mt-3">
 				<h2><br></h2>
 				<hr>
 			</div>
-			
-			<!-- 회원등록 / 회원검색 -->
 			<div class="row input-group">
+				<!-- 영화 등록 -->
 				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="">신규 회원 등록</a></div>
+				<!-- 카테고리별 조회 -->
 				<div style="margin-left: auto;">
 					<select class="btn btn-outline-secondary">
 						<option>===전체 조회===</option>
-						<option>정상 대여/반납 자</option>
-						<option>연체자</option>
 					</select>
 				</div>
+				<!-- 영화 검색 -->
 				<div class="row" style="margin-left: auto">
 					<div>
-						<input placeholder="Search Customer Name" class="form-control" type="text">
+						<input placeholder="Search Film Title" class="form-control" type="text">
 					</div>
 					<div>
 						<a class="btn btn-outline-dark" href="">검색</a>
@@ -44,46 +44,28 @@
 				</div>
 			</div>
 			
-			<!-- 목록 -->
+			<!-- 영화 목록 -->
 			<div style="margin-top: 30px">
 				<table class="table">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>이름</th>
-							<th>주소</th>
-							<th>연락처</th>
-							<th>활동</th>
-							<th>연체</th>
+							<th>ID</th>
+							<th>제목</th>
+							<th>카테고리</th>
+							<th>가격</th>
+							<th>등급</th>
+							<th>상영시간</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${list}">
+						<c:forEach var="film" items="${list}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/auth/CustomerOneServlet?customerId=${item.id}">${item.id}</a></td>
-								<td>${item.name}</td>
-								<td>${item.address}</td>
-								<td>${item.phone}</td>
-								<td>
-									<c:choose>
-										<c:when test="${item.notes == 'active'}">
-											활동중
-										</c:when>
-										<c:otherwise>
-											<p style="color:#CCA63D">탈퇴</p>
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="${item.overdue == 'Y'}">
-											<p style="color:red">연체중</p>
-										</c:when>
-										<c:otherwise>
-											정상
-										</c:otherwise>
-									</c:choose>
-								</td>
+								<td><a href="${pageContext.request.contextPath}/auth/FilmListServlet?filmId=${film.fid}">${film.fid}</a></td>
+								<td>${film.title}</td>
+								<td>${film.category}</td>
+								<td>${film.price}</td>
+								<td>${film.rating}</td>
+								<td>${film.length}분</td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -98,8 +80,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=1">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage-1}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -112,8 +94,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage+1}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${endPage}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
@@ -126,7 +108,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">회원 목록</h1>
+	<br><h1 class="font-lotte-H">영화 목록</h1>
 </div>
 </body>
 </html>

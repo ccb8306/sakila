@@ -43,7 +43,7 @@ public class CustomerDao {
 		stmt.setInt(1, staff.getStoreId());
 		
 		ResultSet rs = stmt.executeQuery();
-		System.out.println(stmt + "<--selectCustomerListCount stmt");
+		System.out.println(stmt + "<--selectCustomerEndPage stmt");
 		
 		if(rs.next()) {
 			endPage = rs.getInt("COUNT(*)");
