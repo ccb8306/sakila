@@ -60,7 +60,7 @@
 					<tbody>
 						<c:forEach var="film" items="${list}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/auth/FilmListServlet?filmId=${film.fid}">${film.fid}</a></td>
+								<td><a href="${pageContext.request.contextPath}/auth/FilmOneServlet?filmId=${film.fid}">${film.fid}</a></td>
 								<td>${film.title}</td>
 								<td>${film.category}</td>
 								<td>${film.price}</td>

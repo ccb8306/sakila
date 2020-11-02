@@ -57,4 +57,43 @@ public class FilmDao {
 		}
 		return endPage;
 	}
+	// 영화 상세보기
+	public FIlmAndCategoryAndLanguage selectFilmOne(Connection conn, int filmId)throws Exception{
+		Film film = null;
+		Category category = null;
+		Language language = null;
+		FIlmAndCategoryAndLanguage facal = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(FilmQuery.SELECT_FILM_ONE);
+		stmt.setInt(1, filmId);
+		
+		ResultSet rs = stmt.executeQuery();
+
+		if(rs.next()) {
+			facal = new FIlmAndCategoryAndLanguage();
+			film = new Film();
+			category = new Category();
+			language = new Language();
+			
+			film.setFilmId(rs.getInt("f.film_id"));
+			film.setTitle(rs.getNString("f.title"));
+			film.setDescription(rs.getString("f.description"));
+			film.setReleaseYear(rs.getString("f.release_year"));
+			film.setRentalDuration(rs.getInt("f.rental_duration"));
+			film.setRentalRate(rs.getInt("f.rental_rate"));
+			film.setLength(rs.getInt("f.length"));
+			film.setReplacementCost(rs.getDouble("f.replacement_cost"));
+			film.setRating(rs.getString("f.rating"));
+			film.setSpecialFeatures(rs.getString("f.special_features"));
+			category.setName(rs.getString("c.name"));
+			language.setName(rs.getString("l.name"));
+			
+			facal.setCategory(category);
+			facal.setFilm(film);
+			facal.setLanguage(language);
+		}
+		
+		return facal;
+		
+	}
 }

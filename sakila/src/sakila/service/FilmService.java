@@ -45,4 +45,36 @@ public class FilmService {
 		
 		return map;
 	}
+	
+	// 영화 상세보기
+	public FIlmAndCategoryAndLanguage getFilmOne(int filmId) {
+		FIlmAndCategoryAndLanguage facal = null;
+		FilmDao filmDao = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			filmDao = new FilmDao();
+			facal = new FIlmAndCategoryAndLanguage();
+			
+			facal = filmDao.selectFilmOne(conn, filmId);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return facal;
+	}
 }
