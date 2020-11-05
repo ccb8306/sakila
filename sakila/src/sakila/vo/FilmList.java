@@ -59,4 +59,21 @@ public class FilmList {
 	public void setActors(String actors) {
 		this.actors = actors;
 	}
+	
+	// 재고 변수
+	private int stock;
+	private int total;
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 }

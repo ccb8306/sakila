@@ -25,12 +25,12 @@
 				<hr>
 			</div>
 			<div class="row input-group">
-				<!-- 영화 등록 -->
-				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="">영화 등록</a></div>
-				<!-- 카테고리별 조회 -->
+				<!-- 재고별 조회 -->
 				<div style="margin-left: auto;">
 					<select class="btn btn-outline-secondary">
 						<option>===전체 조회===</option>
+						<option>===재고 있음===</option>
+						<option>===재고 없음===</option>
 					</select>
 				</div>
 				<!-- 영화 검색 -->
@@ -51,21 +51,23 @@
 						<tr>
 							<th>ID</th>
 							<th>제목</th>
-							<th>카테고리</th>
 							<th>가격</th>
 							<th>등급</th>
 							<th>상영시간</th>
+							<th>재고</th>
+							<th>전체</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="film" items="${list}">
+						<c:forEach var="f" items="${filmList}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/auth/FilmOneServlet?filmId=${film.fid}">${film.fid}</a></td>
-								<td>${film.title}</td>
-								<td>${film.category}</td>
-								<td>${film.price}</td>
-								<td>${film.rating}</td>
-								<td>${film.length}분</td>
+								<td><a href="">${f.fid}</a></td>
+								<td>${f.title}</td>
+								<td>${f.price}</td>
+								<td>${f.rating}</td>
+								<td>${f.length}분</td>
+								<td>${f.stock }개</td>
+								<td>${f.total }개</td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -80,8 +82,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmStockListServlet?currentPage=1">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmStockListServlet?currentPage=${currentPage-1}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -94,8 +96,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmStockListServlet?currentPage=${currentPage+1}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmStockListServlet?currentPage=${endPage}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
