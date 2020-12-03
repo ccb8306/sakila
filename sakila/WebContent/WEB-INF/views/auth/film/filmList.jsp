@@ -25,12 +25,16 @@
 				<hr>
 			</div>
 			<div class="row input-group">
-				<!-- 영화 등록 -->
-				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="">영화 등록</a></div>
-				<!-- 카테고리별 조회 -->
+				<!-- 영화등록 -->
+				<div style="margin-left: 10px">
+					<a href="" class="btn btn-outline-primary">영화 등록</a>
+				</div>
+				<!-- 재고별 조회 -->
 				<div style="margin-left: auto;">
 					<select class="btn btn-outline-secondary">
 						<option>===전체 조회===</option>
+						<option>===재고 있음===</option>
+						<option>===재고 없음===</option>
 					</select>
 				</div>
 				<!-- 영화 검색 -->
@@ -51,21 +55,23 @@
 						<tr>
 							<th>ID</th>
 							<th>제목</th>
-							<th>카테고리</th>
 							<th>가격</th>
 							<th>등급</th>
 							<th>상영시간</th>
+							<th>재고</th>
+							<th>전체</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="film" items="${list}">
+						<c:forEach var="f" items="${filmList}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/auth/FilmOneServlet?filmId=${film.fid}">${film.fid}</a></td>
-								<td>${film.title}</td>
-								<td>${film.category}</td>
-								<td>${film.price}</td>
-								<td>${film.rating}</td>
-								<td>${film.length}분</td>
+								<td>${f.fid}</td>
+								<td><a href="${pageContext.request.contextPath}/auth/FilmOneServlet?filmId=${f.fid}">${f.title}</a></td>
+								<td>${f.price}</td>
+								<td>${f.rating}</td>
+								<td>${f.length}분</td>
+								<td>${f.stock }개</td>
+								<td>${f.total }개</td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -108,7 +114,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">영화 목록</h1>
+	<br><h2 class="font-lotte-H">영화 목록</h2>
 </div>
 </body>
 </html>

@@ -84,5 +84,5 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">영화 상세보기</h1>
+	<br><h2 class="font-lotte-H">영화 상세보기</h2>
 </div>

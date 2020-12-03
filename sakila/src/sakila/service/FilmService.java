@@ -11,21 +11,21 @@ import sakila.vo.*;
 public class FilmService {
 	// 영화 전체 리스트 출력
 	public Map<String, Object> getFilmList(Staff staff, int currentPage, int rowPage){
-		Map<String, Object> map = null;
-		FilmDao filmDao = null;
-		List<FilmList> list = null;
 		Connection conn = null;
+		FilmDao filmStockDao = null;
+		List<FilmList> filmList = null;
+		Map<String, Object> map = null;
 		
 		try {
 			conn = DBUtil.getConnection();
+			filmStockDao = new FilmDao();
 			map = new HashMap<String, Object>();
-			filmDao = new FilmDao();
 			
-			list = filmDao.selectFilmList(conn, staff, currentPage, rowPage);
-			int endPage = filmDao.selectFilmListEndPage(conn, staff, rowPage);
+			int endPage = filmStockDao.selectEndPage(conn, staff, rowPage);
+			filmList = filmStockDao.selectFilmList(conn, staff, currentPage, rowPage);
 			
-			map.put("list", list);
 			map.put("endPage", endPage);
+			map.put("filmList", filmList);
 			
 			conn.commit();
 		} catch (Exception e) {

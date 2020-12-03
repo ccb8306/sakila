@@ -30,16 +30,19 @@ public class FilmListServlet extends HttpServlet {
 		Staff staff = new Staff();
 		staff = (Staff)session.getAttribute("loginStaff");
 		
-		// 리스트와 마지막 페이지 구하기
-		FilmService filmService = new FilmService();
+		// 영화 목록 불러오기
+		List<FilmList> filmList = new ArrayList<FilmList>();
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		FilmService filmService = new FilmService();
 		map = filmService.getFilmList(staff, currentPage, rowPage);
-		List<FilmList> list = new ArrayList<FilmList>();
-		list = (List<FilmList>)map.get("list");
-		endPage = (Integer)map.get("endPage");
+		
+		filmList = (List<FilmList>) map.get("filmList");
+		endPage = (int)map.get("endPage");
+		
 		
 		// 리스트와 마이막 페이지를 뷰에 보내줌
-		request.setAttribute("list", list);
+		request.setAttribute("filmList", filmList);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.getRequestDispatcher("/WEB-INF/views/auth/film/filmList.jsp").forward(request, response);

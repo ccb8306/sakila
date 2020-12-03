@@ -126,7 +126,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">회원 목록</h1>
+	<br><h2 class="font-lotte-H">회원 목록</h2>
 </div>
 </body>
 </html>
