@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import sakila.service.ActorService;
 import sakila.vo.Actor;
 
-@WebServlet("/auth/ActorServlet")
-public class ActorServlet extends HttpServlet {
+@WebServlet("/auth/ActorListServlet")
+public class ActorListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 페이징 변수들
 		int currentPage = 1;

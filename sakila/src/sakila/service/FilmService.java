@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import sakila.common.DBUtil;
+import sakila.dao.ActorDao;
 import sakila.dao.FilmDao;
 import sakila.vo.*;
 
@@ -47,17 +48,26 @@ public class FilmService {
 	}
 	
 	// 영화 상세보기
-	public FIlmAndCategoryAndLanguage getFilmOne(int filmId) {
+	public Map<String, Object> getFilmOne(int filmId) {
 		FIlmAndCategoryAndLanguage facal = null;
 		FilmDao filmDao = null;
+		List<Actor> actorList = null;
+		ActorDao actorDao = null;
 		Connection conn = null;
-		
+		Map<String, Object> map = null;
 		try {
 			conn = DBUtil.getConnection();
 			filmDao = new FilmDao();
+			actorDao = new ActorDao();
+			actorList = new ArrayList<Actor>();
 			facal = new FIlmAndCategoryAndLanguage();
 			
+			actorList = actorDao.selectFilmActorOne(conn, filmId);
 			facal = filmDao.selectFilmOne(conn, filmId);
+			
+			map = new HashMap<String, Object>();
+			map.put("actorList", actorList);
+			map.put("facal", facal);
 			
 			conn.commit();
 		} catch (Exception e) {
@@ -75,6 +85,6 @@ public class FilmService {
 			}
 		}
 		
-		return facal;
+		return map;
 	}
 }

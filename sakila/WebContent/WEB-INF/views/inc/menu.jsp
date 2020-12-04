@@ -43,7 +43,7 @@
 			<a href="${pageContext.request.contextPath}/auth/FilmListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화 대여/관리</a>	
 		</div>
 		<div style="margin-top:10px">
-			<a href="${pageContext.request.contextPath}/auth/ActorServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화배우 관리</a>	
+			<a href="${pageContext.request.contextPath}/auth/ActorListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화배우 관리</a>	
 		</div><hr>
 		<div style="margin-top:10px">
 			<a href="" class="align-left btn btn-block color-black font-NotoSans fs-middle">매장 통계</a>	

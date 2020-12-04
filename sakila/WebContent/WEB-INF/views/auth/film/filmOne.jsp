@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,27 @@
 			<hr>
 			
 			<!-- 영화 출연 배우 -->
-			<div></div>
+			<div>
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th colspan="3">출연 배우</th>
+						</tr>
+					</thead>
+					<tr>
+						<c:set var="actorCnt" value="0" />
+						<c:forEach var="a" items="${actorList}">
+							<c:set var="actorCnt" value="${actorCnt+1}" />
+							
+							<td><a href="${pageContext.request.contextPath}/auth/ActorOneServlet?actorId=${a.actorId}">${a.firstName } ${a.lastName }</a></td>
+							
+							<c:if test="${actorCnt%3 == 0 }">
+								</tr><tr>
+							</c:if>
+						</c:forEach>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

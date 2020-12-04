@@ -53,5 +53,44 @@ public class ActorDao {
 		}
 		return endPage;
 	}
+	// 배우 상세보기
+	public Actor selectActorOne(Connection conn, int actorId) throws Exception{
+		Actor a = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(ActorQuery.SELECT_ACTOR_ONE);
+		stmt.setInt(1, actorId);
+		System.out.println(stmt + "<--selectActorOne stmt");
+		ResultSet rs = stmt.executeQuery();		
+		
+		while(rs.next()) {
+			a = new Actor();
+			a.setActorId(rs.getInt("actor_id"));
+			a.setFirstName(rs.getString("first_name"));
+			a.setLastName(rs.getString("last_name"));
+			a.setFilmInfo(rs.getString("film_info").replace(";", "<hr>"));
+		}
+		return a;
+	}
 	
+	// 한 영화의 배우들 이름 가져오기
+	public List<Actor> selectFilmActorOne(Connection conn, int filmId) throws Exception{
+		List<Actor> list = new ArrayList<Actor>();
+		Actor a = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(ActorQuery.SELECT_FILM_ACTOR_ONE);
+		stmt.setInt(1, filmId);
+		System.out.println(stmt + "<--selectFilmActorOne stmt");
+		ResultSet rs = stmt.executeQuery();		
+		
+		while(rs.next()) {
+			a = new Actor();
+			a.setActorId(rs.getInt("actor_id"));
+			a.setFirstName(rs.getString("first_name"));
+			a.setLastName(rs.getString("last_name"));
+			
+			list.add(a);
+		}
+		return list;
+	}
+
 }

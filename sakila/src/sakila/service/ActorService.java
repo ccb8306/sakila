@@ -52,4 +52,38 @@ public class ActorService {
 		
 		return map;
 	}
+	
+	// 배우 상세보기
+	public Actor getActorOne(int actorId) {
+		Connection conn = null;
+		ActorDao actorDao = null;
+		Actor actor = null;
+		try {
+			// 객체 생성
+			actorDao = new ActorDao();
+			conn = DBUtil.getConnection();
+			actor = new Actor();
+			
+			// 배우 목록과 마지막 페이지 가져오기
+			actor = actorDao.selectActorOne(conn, actorId);
+	
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return actor;
+		
+	}
 }
