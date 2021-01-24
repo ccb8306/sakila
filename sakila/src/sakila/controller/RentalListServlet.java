@@ -23,11 +23,11 @@ public class RentalListServlet extends HttpServlet {
 		int currentPage = 1;
 		int rowPage = 10;
 		int endPage = 1;
+		String filmTitle = "";
 		
 		// 페이지를 받아옴
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			System.out.println(request.getParameter("currentPage") + "<--rentalList request currentPage");
 		}
 		System.out.println(currentPage + "<--rentalList currentPage");
 		
@@ -37,26 +37,39 @@ public class RentalListServlet extends HttpServlet {
 		
 		// 해당 상점의 대여 리스트와 최대 페이지 구하기
 		RentalService rentalService = new RentalService();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map = rentalService.getRentalList(storeId, currentPage, rowPage);
-				
+		Map<String, Object> map = new HashMap<String, Object>();			
 		List<RentalAndFilm> rentalList = new ArrayList<RentalAndFilm>();	
-		rentalList = (List<RentalAndFilm>) map.get("list");
-		endPage = (Integer)map.get("endPage");
-		
+
+		if(request.getParameter("filmTitle") != null) {
+			System.out.println(request.getParameter("filmTitle") + "<--rentalList filmTitle");
+			filmTitle = request.getParameter("filmTitle");
+
+			map = rentalService.getRentalListByFilmTitle(storeId, filmTitle, currentPage, rowPage);
+			rentalList = (List<RentalAndFilm>) map.get("list");
+			endPage = (Integer)map.get("endPage");		
+		} else {
+			map = rentalService.getRentalList(storeId, currentPage, rowPage);
+			rentalList = (List<RentalAndFilm>) map.get("list");
+			endPage = (Integer)map.get("endPage");			
+		}
 		// 대여 리스트를 뷰에 보내줌
 		request.setAttribute("rentalList", rentalList);
 		// 현재 페이지를 보냄
 		request.setAttribute("currentPage", currentPage);
 		// 최대 페이지를 보냄
 		request.setAttribute("endPage", endPage);
+		// 검색
+		request.setAttribute("filmTitle", filmTitle);
 		
 		request.getRequestDispatcher("/WEB-INF/views/auth/rental/rentalList.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int rentalId = Integer.parseInt(request.getParameter("rentalId"));
+		RentalService rentalService = new RentalService();
+		rentalService.returnRentalFilm(rentalId);
+		response.sendRedirect(request.getContextPath() + "/auth/RentalListServlet");
 	}
 
 }

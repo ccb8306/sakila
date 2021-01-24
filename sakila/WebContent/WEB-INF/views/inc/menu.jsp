@@ -32,15 +32,16 @@
 		<div style="margin-top:30px">
 			<a href="${pageContext.request.contextPath}/auth/IndexServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">HOME</a>
 		</div>
+		<hr>
+		<div style="margin-top:10px">
+			<a href="${pageContext.request.contextPath}/auth/FilmListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화 대여/관리</a>	
+		</div>
 		<div style="margin-top:10px">
 			<a href="${pageContext.request.contextPath}/auth/RentalListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화 반납</a>
 		</div>
 		<hr>
 		<div style="margin-top:10px">	
 			<a href="${pageContext.request.contextPath}/auth/CustomerListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">회원목록 관리</a>
-		</div>
-		<div style="margin-top:10px">
-			<a href="${pageContext.request.contextPath}/auth/FilmListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화 대여/관리</a>	
 		</div>
 		<div style="margin-top:10px">
 			<a href="${pageContext.request.contextPath}/auth/ActorListServlet" class="align-left btn btn-block color-black font-NotoSans fs-middle">영화배우 관리</a>	

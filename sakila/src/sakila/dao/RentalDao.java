@@ -58,6 +58,59 @@ public class RentalDao {
 		}	
 		return endPage;
 	}
+	// 대여중인 전체 대여 리스트 출력
+	public List<RentalAndFilm> selectRentalListByFilmTitle(Connection conn, int storeId, String filmTitle, int currentPage, int rowPage) throws Exception{
+		List<RentalAndFilm> list = new ArrayList<RentalAndFilm>();
+		RentalAndFilm raf = null;
+		Rental rental = null;
+		Film film = null;
+		
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle);
+		stmt.setInt(1, storeId);  // 상점아이디
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
+		stmt.setInt(3,(int)((currentPage -1) * rowPage));  // 페이징
+		stmt.setInt(4, rowPage); // 페이징	
+		System.out.println(stmt + "<--select rentalList stmt");
+		
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			rental = new Rental();
+			film = new Film();
+			
+			rental.setRentalId(rs.getInt("r.rental_id"));
+			film.setTitle(rs.getString("f.title"));
+			rental.setRentalDate(rs.getString("rental_date"));
+			film.setRentalDuration(rs.getInt("f.rental_duration"));
+			rental.setReturnDueDate(rs.getString("return_due_date"));
+			
+			raf = new RentalAndFilm();
+			raf.setFilm(film);
+			raf.setRental(rental);
+			
+			list.add(raf);
+		}
+		
+		return list;
+	}
+	// 대여중인 전체 대여 리스트 최대 페이지
+	public int selectRentalListByFilmTitleEndPage(Connection conn, int storeId, String filmTitle, int rowPage)throws Exception {
+		int endPage = 1;
+		
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle_COUNT);
+		stmt.setInt(1, storeId);
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			endPage = rs.getInt("COUNT(*)");
+			if(endPage%rowPage == 0)			
+				endPage = (int)(endPage/rowPage);
+			else
+				endPage = (int)(endPage/rowPage) + 1;
+			
+		}	
+		return endPage;
+	}
 	// 한 고객의 연체 리스트
 	public List<RentalAndFilm> selectCustomerOverDueList(Connection conn , int customerId)throws Exception{
 		List<RentalAndFilm> list = new ArrayList<RentalAndFilm>();
@@ -113,5 +166,14 @@ public class RentalDao {
 		}
 		
 		return list;
+	}
+	
+	// 대여 비디오 반납
+	public void updateRentalReturnDate(Connection conn , int rentalId)throws Exception{	
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.UPDATE_RENTAL_RETURN_DATE);
+		stmt.setInt(1, rentalId);
+		System.out.println(stmt + "<--updateRentalReturnDate stmt");
+		
+		stmt.executeUpdate();
 	}
 }

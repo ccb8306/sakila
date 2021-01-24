@@ -29,9 +29,12 @@
 			</div>
 			
 			<!-- 검색 -->
-			<div style="width:50%; margin-left: auto;" class="input-group">
-				<input class="form-control" placeholder="Search Rental ID" type="text"><a style="width:110px" class="btn btn-outline-dark" href="">검색</a>
-			</div>
+			<form action="${pageContext.request.contextPath}/auth/RentalListServlet" method="get">
+				<div style="width:50%; margin-left: auto;" class="input-group">
+						<input class="form-control" placeholder="Search Film Title" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
+						<button type="submit" style="width:110px" class="btn btn-outline-dark">검색</button>
+				</div>
+			</form>
 			
 			<!-- 내용 -->
 			<div style="margin-top:50px">
@@ -54,7 +57,12 @@
 								<td>${item.rental.rentalDate}</td>
 								<td>${item.film.rentalDuration}일</td>
 								<td>${item.rental.returnDueDate}</td>
-								<td><a class="btn btn-outline-danger" href="">반납</a></td>
+								<td>
+									<form action="${pageContext.request.contextPath}/auth/RentalListServlet" method="post">
+										<input type="hidden" name="rentalId" value="${item.rental.rentalId}">									
+										<button class="btn btn-outline-danger" type="submit">반납</button>									
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -68,8 +76,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=1&filmTitle=${filmTitle}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${currentPage-1}&filmTitle=${filmTitle}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -82,8 +90,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${currentPage+1}&filmTitle=${filmTitle}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/RentalListServlet?currentPage=${endPage}&filmTitle=${filmTitle}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
