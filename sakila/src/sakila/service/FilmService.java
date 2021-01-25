@@ -48,10 +48,11 @@ public class FilmService {
 	}
 	
 	// 영화 상세보기
-	public Map<String, Object> getFilmOne(int filmId) {
+	public Map<String, Object> getFilmOne(int storeId, int filmId) {
 		FIlmAndCategoryAndLanguage facal = null;
 		FilmDao filmDao = null;
 		List<Actor> actorList = null;
+		List<Rental> stockList = null;
 		ActorDao actorDao = null;
 		Connection conn = null;
 		Map<String, Object> map = null;
@@ -60,12 +61,16 @@ public class FilmService {
 			filmDao = new FilmDao();
 			actorDao = new ActorDao();
 			actorList = new ArrayList<Actor>();
+			stockList = new ArrayList<Rental>();
+			facal = new FIlmAndCategoryAndLanguage();
 			facal = new FIlmAndCategoryAndLanguage();
 			
-			actorList = actorDao.selectFilmActorOne(conn, filmId);
-			facal = filmDao.selectFilmOne(conn, filmId);
+			stockList = filmDao.selectFilmStockList(conn, storeId, filmId); // 재고 목록
+			actorList = actorDao.selectFilmActorOne(conn, filmId); // 출연 영화배우 목록
+			facal = filmDao.selectFilmOne(conn, filmId); // 영화 정보
 			
 			map = new HashMap<String, Object>();
+			map.put("stockList", stockList);
 			map.put("actorList", actorList);
 			map.put("facal", facal);
 			

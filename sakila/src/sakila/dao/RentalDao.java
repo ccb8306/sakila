@@ -176,4 +176,15 @@ public class RentalDao {
 		
 		stmt.executeUpdate();
 	}
+	
+	// 영화 대여하기
+	public void insertRental(Connection conn, Rental rental) throws Exception{
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.INSERT_RENTAL);
+		stmt.setInt(1, rental.getInventoryId());
+		stmt.setInt(2, rental.getCusotomerId());
+		stmt.setInt(3, rental.getStaffId());
+		System.out.println(stmt + "<--insertRental stmt");
+		
+		stmt.executeUpdate();
+	}
 }

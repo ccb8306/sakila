@@ -97,4 +97,29 @@ public class FilmDao {
 		return facal;
 		
 	}
+	// 해당 영화의 재고 상태
+	public List<Rental> selectFilmStockList(Connection conn, int storeId, int filmId)throws Exception {
+		List<Rental> list = new ArrayList<>();
+		Rental rental = null;
+
+		PreparedStatement stmt = conn.prepareStatement(FilmQuery.SELECT_FILM_STOCK_LIST);
+		stmt.setInt(1, storeId);
+		stmt.setInt(2, filmId);
+		System.out.println(stmt + "<--selectFilmStockList stmt");
+		
+		ResultSet rs = stmt.executeQuery();
+
+		while(rs.next()) {
+			System.out.println(rs.getInt("i.inventory_id") + "<--rs.getInt(i.inventory_id)");
+			rental = new Rental();
+			rental.setInventoryId(rs.getInt("i.inventory_id"));
+			rental.setRentalDate(rs.getString("r.rental_date"));
+			rental.setReturnDate(rs.getString("r.return_date"));
+			rental.setRentalId(rs.getInt("r.rental_id"));
+			
+			list.add(rental);
+		}
+		
+		return list;
+	}
 }

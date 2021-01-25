@@ -14,15 +14,50 @@
 	<div class="row">
 		<!-- 메뉴 -->
 		<div class="col-sm-3">
-		<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 		</div>
 		
 		<div class="col-sm-9 bg-white mt-5 mb-5">
-			<!-- 영화 정보 -->
+			<!-- 대여 현황 --><h2><br></h2>
+			<div>
+				<table class="table">	
+					<thead class="thead-light">
+						<tr>
+							<th>인벤토리 ID</th>
+							<th>최종 대여 ID</th>
+							<th>최종 대여 날짜</th>
+							<th>최종 반납 날짜</th>
+							<th>대여하기</th>
+						</tr>
+					</thead>
+					<c:forEach var="s" items="${stockList}">
+						<tr>
+							<td>${s.inventoryId}</td>
+							<td>${s.rentalId}</td>
+							<td>${s.rentalDate}</td>
+							<td>${s.returnDate}</td>
+							<c:if test="${!empty s.returnDate}">
+								<td>
+									<form action="${pageContext.request.contextPath}/auth/FilmOneServlet" method="post">
+										<input type="hidden" name="inventoryId" value="${s.inventoryId}">
+										<button class="btn btn-warning">대여하기</button>
+									</form>
+								</td>
+							</c:if>
+							<c:if test="${empty s.returnDate}">
+								<td>
+									<p class="btn btn-danger">대여불가</p>
+								</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<!-- 영화 정보 -->				
 			<div>
 				<table class="table table-borderless">	
 					<tr>
-						<th style="width: 25%"><h2><br></h2></th>
+						<th style="width: 25%"></th>
 						<td class="align-right"><a class="btn btn-outline-dark" href="">영화 정보 수정</a></td>
 					</tr>
 					<tr><td colspan="2"><hr></td></tr>
@@ -32,11 +67,11 @@
 					</tr>
 					<tr>
 						<th>카테고리 : </th>
-						<td>${facal.category.name }</td>
+						<td>${facal.category.name}</td>
 					</tr>
 					<tr>
 						<th>제목 : </th>
-						<td>${facal.film.title }</td>
+						<td>${facal.film.title}</td>
 					</tr>
 					<tr>
 						<th>내용 : </th>
@@ -44,7 +79,7 @@
 					</tr>
 					<tr>
 						<th>언어 : </th>
-						<td>${facal.language.name }</td>
+						<td>${facal.language.name}</td>
 					</tr>
 					<tr>
 						<th>개봉 연도 : </th>

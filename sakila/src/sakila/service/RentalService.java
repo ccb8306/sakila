@@ -188,4 +188,31 @@ public class RentalService {
 		}
 	}
 	
+
+	// 비디오 대여하기
+	public void addRental(Rental rental) {
+		Connection conn = null;
+		RentalDao rentalDao = null;
+		try {
+			conn = DBUtil.getConnection();
+			rentalDao = new RentalDao();
+			rentalDao.insertRental(conn, rental);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
