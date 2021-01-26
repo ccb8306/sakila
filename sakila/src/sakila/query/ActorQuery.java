@@ -12,4 +12,6 @@ public class ActorQuery {
 	// 한 영화의 배우 불러오기
 	public final static String SELECT_FILM_ACTOR_ONE = "SELECT a.actor_id, a.first_name, a.last_name FROM actor a JOIN film_actor fa ON a.actor_id = fa.actor_id JOIN film f ON f.film_id = fa.film_id WHERE f.film_id = ?";
 
+	// 영화에 출연 배우 추가
+	public final static String INSERT_FILM_ACTOR = "INSERT INTO film_actor(actor_id, film_id) VALUES(?, ?)";
 }

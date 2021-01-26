@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-main">
 <div class="container-fluid wrap pt-3">
@@ -59,7 +59,7 @@
 			<hr>
 			<!-- 연체 목록 -->
 			<div>
-				<div><h4>연체 목록</h4></div>
+				<div><h4>미반납 목록</h4></div>
 				<div>
 					<iframe width="100%" height="300px" src="${pageContext.request.contextPath}/auth/CustomerOverDueListServlet?customerId=${cacl.customerList.id}"></iframe>
 				</div>
@@ -68,7 +68,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">회원 상세보기</h1>
+	<br><h2 class="font-lotte-H">회원 상세보기</h2>
 </div>
 </body>
 </html>

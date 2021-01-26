@@ -8,7 +8,7 @@
 <title>filmList</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-main">
 <div class="container-fluid wrap pt-3">
@@ -27,24 +27,16 @@
 			<div class="row input-group">
 				<!-- 영화등록 -->
 				<div style="margin-left: 10px">
-					<a href="" class="btn btn-outline-primary">영화 등록</a>
-				</div>
-				<!-- 재고별 조회 -->
-				<div style="margin-left: auto;">
-					<select class="btn btn-outline-secondary">
-						<option>===전체 조회===</option>
-						<option>===재고 있음===</option>
-						<option>===재고 없음===</option>
-					</select>
+					<a href="${pageContext.request.contextPath}/auth/AddFilmServlet" class="btn btn-outline-primary">영화 등록</a>
 				</div>
 				<!-- 영화 검색 -->
-				<div class="row" style="margin-left: auto">
-					<div>
-						<input placeholder="Search Film Title" class="form-control" type="text">
-					</div>
-					<div>
-						<a class="btn btn-outline-dark" href="">검색</a>
-					</div>
+				<div style="margin-left: auto">
+					<form class="form-inline" method="get" action="${pageContext.request.contextPath}/auth/FilmListServlet">
+						<div class="form-group">
+							<input placeholder="Search Film Title" class="form-control" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
+							<button type="submit" class="btn btn-outline-dark">검색</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			
@@ -86,8 +78,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=1&filmTitle=${filmTitle}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage-1}&filmTitle=${filmTitle}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -100,8 +92,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${currentPage+1}&filmTitle=${filmTitle}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmListServlet?currentPage=${endPage}&filmTitle=${filmTitle}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		

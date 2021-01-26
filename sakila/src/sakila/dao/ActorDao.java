@@ -92,5 +92,13 @@ public class ActorDao {
 		}
 		return list;
 	}
+	
+	// 영화에 출연 배우 추가
+	public void insertFilmActor(Connection conn, int actorId, int filmId) throws Exception {
+		PreparedStatement stmt = conn.prepareStatement(ActorQuery.INSERT_FILM_ACTOR);
+		stmt.setInt(1, actorId);
+		stmt.setInt(2, filmId);
+		stmt.executeUpdate();
+	}
 
 }

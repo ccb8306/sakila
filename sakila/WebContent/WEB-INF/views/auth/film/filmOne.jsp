@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-main">
 <div class="container-fluid wrap pt-3">
@@ -19,8 +19,18 @@
 		
 		<div class="col-sm-9 bg-white mt-5 mb-5">
 			<!-- 대여 현황 --><h2><br></h2>
-			<div>
+			<div>	
 				<table class="table">	
+					<tr>
+						<td class="align-right">
+							<form method="post" action="${pageContext.request.contextPath}/auth/FilmOneServlet">
+								<input type="hidden" name="filmId" value="${facal.film.filmId}">
+								<button type="submit" class="btn btn-dark">재고 추가하기</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<table class="table">
 					<thead class="thead-light">
 						<tr>
 							<th>인벤토리 ID</th>
@@ -36,15 +46,12 @@
 							<td>${s.rentalId}</td>
 							<td>${s.rentalDate}</td>
 							<td>${s.returnDate}</td>
-							<c:if test="${!empty s.returnDate}">
+							<c:if test="${!empty s.returnDate || (empty s.returnDate && empty s.rentalDate)}">
 								<td>
-									<form action="${pageContext.request.contextPath}/auth/FilmOneServlet" method="post">
-										<input type="hidden" name="inventoryId" value="${s.inventoryId}">
-										<button class="btn btn-warning">대여하기</button>
-									</form>
+									<a class="btn btn-warning" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?inventoryId=${s.inventoryId}">대여하기</a>
 								</td>
 							</c:if>
-							<c:if test="${empty s.returnDate}">
+							<c:if test="${empty s.returnDate && !empty s.rentalDate}">
 								<td>
 									<p class="btn btn-danger">대여불가</p>
 								</td>
@@ -58,7 +65,7 @@
 				<table class="table table-borderless">	
 					<tr>
 						<th style="width: 25%"></th>
-						<td class="align-right"><a class="btn btn-outline-dark" href="">영화 정보 수정</a></td>
+						<td class="align-right"><a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/auth/ModifyFilmServlet?filmId=${facal.film.filmId}">영화 정보 수정</a></td>
 					</tr>
 					<tr><td colspan="2"><hr></td></tr>
 					<tr>
@@ -119,7 +126,8 @@
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
-							<th colspan="3">출연 배우</th>
+							<th colspan="2">출연 배우</th>
+							<th class="align-right"><a class="btn btn-primary" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?filmId=${facal.film.filmId}">출연 배우 추가</a> </th>
 						</tr>
 					</thead>
 					<tr>

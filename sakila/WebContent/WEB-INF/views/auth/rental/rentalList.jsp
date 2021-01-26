@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body class="body-main">
@@ -104,7 +104,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">대여 목록</h1>
+	<br><h2 class="font-lotte-H">대여 목록</h2>
 </div>
 </body>
 </html>

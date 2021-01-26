@@ -48,11 +48,17 @@ public class FilmOneServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/auth/film/filmOne.jsp").forward(request, response);
 	}
 
-	
+	// 재고 추가하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int inventoryId = Integer.parseInt(request.getParameter("inventoryId"));
-
-		response.sendRedirect(request.getContextPath() + "/auth/FilmCustomerListServlet?inventoryId=" + inventoryId);
+		int filmId = Integer.parseInt(request.getParameter("filmId"));
+		HttpSession session = request.getSession();
+		Staff staff = new Staff();
+		staff = (Staff)session.getAttribute("loginStaff");
+		int storeId = staff.getStoreId();
+		FilmService filmService = new FilmService();
+		filmService.addInventory(filmId, storeId);
+		
+		response.sendRedirect(request.getContextPath() + "/auth/FilmOneServlet?filmId=" + filmId);
 	}
 
 }

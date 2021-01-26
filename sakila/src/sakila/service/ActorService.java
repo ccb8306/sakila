@@ -86,4 +86,32 @@ public class ActorService {
 		return actor;
 		
 	}
+	// 영화에 출연배우 추가하기
+	public void addFilmActor(int actorId, int filmId) {
+		Connection conn = null;
+		ActorDao actorDao = null;
+		try {
+			// 객체 생성
+			actorDao = new ActorDao();
+			conn = DBUtil.getConnection();
+			
+			actorDao.insertFilmActor(conn, actorId, filmId);
+	
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

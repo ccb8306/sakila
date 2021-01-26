@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="bg-lightgray">
 <div class="container-fluid">
@@ -19,14 +19,13 @@
 				<th>영화 이름</th>
 				<th>대여일</th>
 				<th>반납 예정일</th>
-				<th>연채액</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
 				<c:when test="${empty list}">
 					<tr>
-						<td class="align-center" colspan="5">연체가 없습니다.</td>
+						<td class="align-center" colspan="5">미반납 내역이 없습니다.</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -36,7 +35,6 @@
 							<td>${item.film.title}</td>
 							<td>${item.rental.rentalDate}</td>
 							<td>${item.rental.returnDueDate}</td>
-							<td>0.00</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

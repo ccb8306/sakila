@@ -7,7 +7,7 @@
 <title>customerList</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<link href="/sakila/sakila.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="body-main">
 <div class="container-fluid wrap pt-3">
@@ -54,14 +54,14 @@
 							<th>주소</th>
 							<th>연락처</th>
 							<th>활동</th>
-							<th>연체</th>
+							<th>대여여부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="item" items="${list}">
 							<tr>
-								<td><a href="${pageContext.request.contextPath}/auth/CustomerOneServlet?customerId=${item.id}">${item.id}</a></td>
-								<td>${item.name}</td>
+								<td>${item.id}</td>
+								<td><a href="${pageContext.request.contextPath}/auth/CustomerOneServlet?customerId=${item.id}">${item.name}</a></td>
 								<td>${item.address}</td>
 								<td>${item.phone}</td>
 								<td>
@@ -77,7 +77,7 @@
 								<td>
 									<c:choose>
 										<c:when test="${item.overdue == 'Y'}">
-											<p style="color:red">연체중</p>
+											<p style="color:red">대여중</p>
 										</c:when>
 										<c:otherwise>
 											정상

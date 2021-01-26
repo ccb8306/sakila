@@ -20,7 +20,8 @@ public class FilmListServlet extends HttpServlet {
 		int currentPage = 1;
 		int rowPage = 10;
 		int endPage = 1;
-		
+		String filmTitle = "";
+		// 현제 페이지
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
@@ -29,13 +30,21 @@ public class FilmListServlet extends HttpServlet {
 		
 		Staff staff = new Staff();
 		staff = (Staff)session.getAttribute("loginStaff");
-		
-		// 영화 목록 불러오기
+
 		List<FilmList> filmList = new ArrayList<FilmList>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		FilmService filmService = new FilmService();
-		map = filmService.getFilmList(staff, currentPage, rowPage);
+		
+		// 영화 제목 검색시
+		if(request.getParameter("filmTitle") != null) {
+			filmTitle = request.getParameter("filmTitle");
+			
+			map = filmService.getFilmListByFilmTitle(staff, filmTitle, currentPage, rowPage);
+			
+		// 영화 전체 목록
+		} else {	
+			map = filmService.getFilmList(staff, currentPage, rowPage);
+		}
 		
 		filmList = (List<FilmList>) map.get("filmList");
 		endPage = (int)map.get("endPage");
@@ -45,6 +54,7 @@ public class FilmListServlet extends HttpServlet {
 		request.setAttribute("filmList", filmList);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("filmTitle", filmTitle);
 		request.getRequestDispatcher("/WEB-INF/views/auth/film/filmList.jsp").forward(request, response);
 	}
 
