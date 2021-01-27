@@ -67,9 +67,10 @@ public class RentalDao {
 		
 		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle);
 		stmt.setInt(1, storeId);  // 상점아이디
-		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
-		stmt.setInt(3,(int)((currentPage -1) * rowPage));  // 페이징
-		stmt.setInt(4, rowPage); // 페이징	
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목 or 대여 id
+		stmt.setString(3, filmTitle); // 영화 제목 or 대여 id
+		stmt.setInt(4,(int)((currentPage -1) * rowPage));  // 페이징
+		stmt.setInt(5, rowPage); // 페이징	
 		System.out.println(stmt + "<--select rentalList stmt");
 		
 		ResultSet rs = stmt.executeQuery();
@@ -98,7 +99,8 @@ public class RentalDao {
 		
 		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle_COUNT);
 		stmt.setInt(1, storeId);
-		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목 or 대여 id
+		stmt.setString(3, filmTitle); // 영화 제목 or 대여 id
 		ResultSet rs = stmt.executeQuery();
 		
 		if(rs.next()) {

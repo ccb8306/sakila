@@ -33,7 +33,18 @@ public class CustomerOneServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String notes = request.getParameter("notes");
+		int active = 0;
+		if(notes.equals("active")) {
+			active = 0;
+		} else {
+			active = 1;
+		}
+		CustomerService customerService = new CustomerService();
+		customerService.modifyCustomerActive(id, active);
 		
+		response.sendRedirect(request.getContextPath() + "/auth/CustomerOneServlet?customerId=" + id);
 	}
 
 }

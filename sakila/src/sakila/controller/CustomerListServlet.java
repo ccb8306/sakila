@@ -26,7 +26,7 @@ public class CustomerListServlet extends HttpServlet {
 		int currentPage = 1;
 		int rowPage = 10;
 		int endPage = 0;
-		
+		String name = "";
 		// 현재 페이지 받기
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -36,13 +36,18 @@ public class CustomerListServlet extends HttpServlet {
 		Staff staff = new Staff();
 		staff = (Staff)session.getAttribute("loginStaff");
 		
-		// 서비스에서 맵 받아오기
 		Map<String, Object> map = new HashMap<String, Object>();
 		CustomerService customerService = new CustomerService();
-		map = customerService.getCustomerList(staff, currentPage, rowPage);
-		
-		// 맵에서 데이터 추출
 		List<CustomerList> list = new ArrayList<CustomerList>();
+
+		// 서비스에서 맵 받아오기
+		if(request.getParameter("name") != null) {
+			name = request.getParameter("name");
+			
+			map = customerService.getCustomerListByName(staff, name, currentPage, rowPage);
+		} else {
+			map = customerService.getCustomerList(staff, currentPage, rowPage);
+		}
 		list = (List<CustomerList>)map.get("list");
 		endPage = (Integer)map.get("endPage");
 		
@@ -50,12 +55,12 @@ public class CustomerListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("name", name);
 		request.getRequestDispatcher("/WEB-INF/views/auth/customer/customerList.jsp").forward(request, response);
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 	}
 
 }

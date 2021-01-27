@@ -31,7 +31,7 @@
 			<!-- 검색 -->
 			<form action="${pageContext.request.contextPath}/auth/RentalListServlet" method="get">
 				<div style="width:50%; margin-left: auto;" class="input-group">
-						<input class="form-control" placeholder="Search Film Title" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
+						<input class="form-control" placeholder="Search Rental ID or Film Title" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
 						<button type="submit" style="width:110px" class="btn btn-outline-dark">검색</button>
 				</div>
 			</form>

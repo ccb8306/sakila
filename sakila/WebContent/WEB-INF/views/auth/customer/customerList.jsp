@@ -26,21 +26,14 @@
 			
 			<!-- 회원등록 / 회원검색 -->
 			<div class="row input-group">
-				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="">신규 회원 등록</a></div>
-				<div style="margin-left: auto;">
-					<select class="btn btn-outline-secondary">
-						<option>===전체 조회===</option>
-						<option>정상 대여/반납 자</option>
-						<option>연체자</option>
-					</select>
-				</div>
+				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/AddCustomerServlet">신규 회원 등록</a></div>
 				<div class="row" style="margin-left: auto">
-					<div>
-						<input placeholder="Search Customer Name" class="form-control" type="text">
-					</div>
-					<div>
-						<a class="btn btn-outline-dark" href="">검색</a>
-					</div>
+					<form class="form-inline" method="get" action="${pageContext.request.contextPath}/auth/CustomerListServlet">
+						<div class="form-group">
+							<input placeholder="Search Customer Name" class="form-control" type="text" name="name" id="name" value="${name}">
+							<button type="submit" class="btn btn-outline-dark">검색</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			
@@ -98,8 +91,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=1&name=${name}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage-1}&name=${name}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -112,8 +105,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${currentPage+1}&name=${name}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/CustomerListServlet?currentPage=${endPage}&name=${name}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
