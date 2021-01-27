@@ -25,28 +25,35 @@ public class FilmCustomerListServlet extends HttpServlet {
 	// 회원 목록
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+
 		// 페이징 변수들
 		int currentPage = 1;
 		int rowPage = 10;
 		int endPage = 0;
-		
+		String name = "";
+
+		int inventoryId = Integer.parseInt(request.getParameter("inventoryId"));
 		// 현재 페이지 받기
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		int inventoryId = Integer.parseInt(request.getParameter("inventoryId"));
+		
 		// 세션 불러와서 저장
 		Staff staff = new Staff();
 		staff = (Staff)session.getAttribute("loginStaff");
 		
-		// 서비스에서 맵 받아오기
 		Map<String, Object> map = new HashMap<String, Object>();
 		CustomerService customerService = new CustomerService();
-		map = customerService.getCustomerList(staff, currentPage, rowPage);
-		
-		// 맵에서 데이터 추출
 		List<CustomerList> list = new ArrayList<CustomerList>();
+
+		// 서비스에서 맵 받아오기
+		if(request.getParameter("name") != null) {
+			name = request.getParameter("name");
+			
+			map = customerService.getCustomerListByName(staff, name, currentPage, rowPage);
+		} else {
+			map = customerService.getCustomerList(staff, currentPage, rowPage);
+		}
 		list = (List<CustomerList>)map.get("list");
 		endPage = (Integer)map.get("endPage");
 		
@@ -54,6 +61,7 @@ public class FilmCustomerListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("name", name);
 		request.setAttribute("inventoryId", inventoryId);
 		request.getRequestDispatcher("/WEB-INF/views/auth/film/filmCustomerList.jsp").forward(request, response);
 	}

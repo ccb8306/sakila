@@ -28,10 +28,13 @@
 			<div class="row input-group">
 				<div class="row" style="margin-left: auto">
 					<div>
-						<input placeholder="Search Customer Name" class="form-control" type="text">
-					</div>
-					<div>
-						<a class="btn btn-outline-dark" href="">검색</a>
+						<form class="form-inline" method="get" action="${pageContext.request.contextPath}/auth/FilmCustomerListServlet">
+							<div class="form-group">
+								<input type="hidden" name="inventoryId" value="${inventoryId}">
+								<input placeholder="Search Customer Name" class="form-control" type="text" name="name" id="name" value="${name}">
+								<button type="submit" class="btn btn-outline-dark">검색</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -96,8 +99,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=1&inventoryId=${inventoryId}">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${currentPage-1}&inventoryId=${inventoryId}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=1&inventoryId=${inventoryId}&name=${name}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${currentPage-1}&inventoryId=${inventoryId}&name=${name}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -110,8 +113,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${currentPage+1}&inventoryId=${inventoryId}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${endPage}&inventoryId=${inventoryId}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${currentPage+1}&inventoryId=${inventoryId}&name=${name}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmCustomerListServlet?currentPage=${endPage}&inventoryId=${inventoryId}&name=${name}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		

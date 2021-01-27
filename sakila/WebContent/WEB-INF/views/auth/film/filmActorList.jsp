@@ -70,8 +70,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=1&filmId=${filmId}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage-1}&filmId=${filmId}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -84,8 +84,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage+1}&filmId=${filmId}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${endPage}&filmId=${filmId}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
