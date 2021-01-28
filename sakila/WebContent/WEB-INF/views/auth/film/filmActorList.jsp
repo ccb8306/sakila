@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ActorList</title>
+<title>filmActorList</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link href="${pageContext.request.contextPath}/sakila.css" rel="stylesheet" type="text/css" />
@@ -27,12 +27,13 @@
 			<!-- 배우등록 / 배우 검색 -->
 			<div class="row input-group">
 				<div class="row" style="margin-left: auto">
-					<div>
-						<input placeholder="Search Actor Name" class="form-control" type="text">
-					</div>
-					<div>
-						<a class="btn btn-outline-dark" href="">검색</a>
-					</div>
+					<form class="form-inline" method="get" action="${pageContext.request.contextPath}/auth/FilmActorListServlet">
+						<div class="form-group">
+							<input type="hidden" name="filmId" value="${filmId}">
+							<input placeholder="Search Actor Name" class="form-control" type="text" name="name" id="name" value="${name}">
+							<button type="submit" class="btn btn-outline-dark">검색</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			
@@ -70,8 +71,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=1&filmId=${filmId}">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage-1}&filmId=${filmId}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=1&filmId=${filmId}&name=${name}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage-1}&filmId=${filmId}&name=${name}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -84,8 +85,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage+1}&filmId=${filmId}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${endPage}&filmId=${filmId}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${currentPage+1}&filmId=${filmId}&name=${name}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/FilmActorListServlet?currentPage=${endPage}&filmId=${filmId}&name=${name}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		

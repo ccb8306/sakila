@@ -23,7 +23,7 @@
 				<table class="table table-borderless">	
 					<tr>
 						<th style="width: 25%"><h2><br></h2></th>
-						<td class="align-right"><a class="btn btn-outline-dark" href="">정보 수정</a></td>
+						<td class="align-right"><a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/auth/ModifyActorServlet?actorId=${actor.actorId}">정보 수정</a></td>
 					</tr>
 					<tr><td colspan="2"><hr></td></tr>
 					<tr>

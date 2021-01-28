@@ -17,6 +17,7 @@ import sakila.dao.RentalDao;
 import sakila.service.CustomerService;
 import sakila.service.RentalService;
 import sakila.vo.CustomerList;
+import sakila.vo.Payment;
 import sakila.vo.Rental;
 import sakila.vo.Staff;
 
@@ -79,8 +80,12 @@ public class FilmCustomerListServlet extends HttpServlet {
 		rental.setInventoryId(inventoryId);
 		rental.setStaffId(staffId);
 		
+		Payment payment = new Payment();
+		payment.setStaffId(staffId);
+		payment.setCustomerId(customerId);
+		
 		RentalService rentalService = new RentalService();
-		rentalService.addRental(rental);
+		rentalService.addRental(rental, payment);
 		
 		response.sendRedirect(request.getContextPath() + "/auth/RentalListServlet");
 	}

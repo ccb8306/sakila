@@ -28,4 +28,12 @@ public class RentalQuery {
 	// 영화 대여하기
 	public final static String INSERT_RENTAL = "INSERT INTO rental(rental_date, inventory_id, customer_id, staff_id) VALUES (NOW(), ?,?,?)";
 
+	// 최신 키값 가져오기
+	public final static String SELECT_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() id";
+	
+	// 결제 하기
+	public final static String INSERT_PAYMENT = "INSERT INTO payment(customer_id, staff_id, rental_id, amount, payment_date) VALUES (?, ?, ?, ?, now())";
+
+	// 대여 id로 해당 비디오 가격 가져오기
+	public final static String SELECT_RENTAL_RATE_BY_RENTAL_ID = "SELECT f.rental_rate FROM film f JOIN inventory i ON f.film_id = i.film_id JOIN rental r ON r.inventory_id = i.inventory_id WHERE r.rental_id = ?";
 }

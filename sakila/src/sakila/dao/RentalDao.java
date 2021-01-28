@@ -3,6 +3,7 @@ package sakila.dao;
 import java.sql.*;
 import java.util.*;
 
+import sakila.query.CustomerQuery;
 import sakila.query.RentalQuery;
 import sakila.vo.*;
 
@@ -188,5 +189,43 @@ public class RentalDao {
 		System.out.println(stmt + "<--insertRental stmt");
 		
 		stmt.executeUpdate();
+	}
+	
+	// 마지막 키값 가져오기
+	public int selectLastInsertId(Connection conn) throws Exception {
+		PreparedStatement stmt = conn.prepareStatement(CustomerQuery.SELECT_LAST_INSERT_ID);
+		int lastId = 0;
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			lastId = rs.getInt("id");
+		}
+		System.out.println(lastId + "<--lastId");
+		
+		return lastId;
+	}
+	
+	// 영화 결제하기
+	public void insertPayment(Connection conn, Payment payment) throws Exception{
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.INSERT_PAYMENT);
+		stmt.setInt(1, payment.getCustomerId());
+		stmt.setInt(2, payment.getStaffId());
+		stmt.setInt(3, payment.getRental_id());
+		stmt.setDouble(4, payment.getAmount());
+		System.out.println(stmt + "<--insertPayment stmt");
+		
+		stmt.executeUpdate();
+	}
+	// 렌탈id로 해당 비디오 가격 가져오기
+	public double selectRentalRateByRentalId(Connection conn, int rentalId) throws Exception {
+		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_RATE_BY_RENTAL_ID);
+		stmt.setInt(1, rentalId);
+		ResultSet rs = stmt.executeQuery();
+		
+		double rentalRate = 0;
+		if(rs.next()) {
+			rentalRate = rs.getDouble("f.rental_rate");
+		}
+		
+		return rentalRate;
 	}
 }

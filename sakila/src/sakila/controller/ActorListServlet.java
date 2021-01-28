@@ -22,19 +22,28 @@ public class ActorListServlet extends HttpServlet {
 		int currentPage = 1;
 		int rowPage = 10;
 		int endPage = 0;
-		
+		String name = "";
 		// 현재 페이지 받기
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		// 서비스에서 맵 받아오기
 		Map<String, Object> map = new HashMap<String, Object>();
 		ActorService actorService = new ActorService();
-		map = actorService.getActorList(currentPage, rowPage);
+		List<Actor> list = new ArrayList<Actor>();
+		
+
+		// 서비스에서 맵 받아오기
+		// 검색 키워드가 넘어올 시
+		if(request.getParameter("name") != null) {
+			name = request.getParameter("name");
+			
+			map = actorService.getActorListByName(name, currentPage, rowPage);
+		} else {
+			map = actorService.getActorList(currentPage, rowPage);
+		}
 		
 		// 맵에서 데이터 추출
-		List<Actor> list = new ArrayList<Actor>();
 		list = (List<Actor>)map.get("list");
 		endPage = (Integer)map.get("endPage");
 		
@@ -42,6 +51,7 @@ public class ActorListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("endPage", endPage);
+		request.setAttribute("name", name);
 		request.getRequestDispatcher("/WEB-INF/views/auth/actor/actorList.jsp").forward(request, response);
 	}
 

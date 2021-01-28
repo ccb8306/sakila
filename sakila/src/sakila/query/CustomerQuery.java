@@ -32,4 +32,5 @@ public class CustomerQuery {
 	
 	// 고객 정보 추가하기
 	public final static String INSERT_CUSTOMER = "INSERT INTO customer(store_id, first_name, last_name, email, address_id, active, create_date) VALUES (?,?,?,?,?,1,now())";
+	
 }

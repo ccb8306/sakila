@@ -190,13 +190,17 @@ public class RentalService {
 	
 
 	// 비디오 대여하기
-	public void addRental(Rental rental) {
+	public void addRental(Rental rental, Payment payment) {
 		Connection conn = null;
 		RentalDao rentalDao = null;
 		try {
 			conn = DBUtil.getConnection();
 			rentalDao = new RentalDao();
 			rentalDao.insertRental(conn, rental);
+			int lastId = rentalDao.selectLastInsertId(conn);
+			payment.setRental_id(lastId);
+			payment.setAmount(rentalDao.selectRentalRateByRentalId(conn, lastId));
+			rentalDao.insertPayment(conn, payment);
 			
 			conn.commit();
 		} catch (Exception e) {
@@ -213,6 +217,7 @@ public class RentalService {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 }

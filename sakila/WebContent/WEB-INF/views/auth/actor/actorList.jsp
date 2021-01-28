@@ -26,14 +26,14 @@
 			
 			<!-- 배우등록 / 배우 검색 -->
 			<div class="row input-group">
-				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="">배우 등록</a></div>
-				<div class="row" style="margin-left: auto">
-					<div>
-						<input placeholder="Search Actor Name" class="form-control" type="text">
-					</div>
-					<div>
-						<a class="btn btn-outline-dark" href="">검색</a>
-					</div>
+				<div style="margin-left: 10px"><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/auth/AddActorServlet">배우 등록</a></div>
+				<div style="margin-left: auto">
+					<form class="form-inline" method="get" action="${pageContext.request.contextPath}/auth/ActorListServlet">
+						<div class="form-group">
+							<input placeholder="Search Actor Name" class="form-control" type="text" name="name" id="name" value="${name}">
+							<button type="submit" class="btn btn-outline-dark">검색</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			
@@ -65,8 +65,8 @@
 					<!-- other : 현재 페이지가 1일 시 -->
 					<c:choose>
 						<c:when test="${currentPage > '1'}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=1">처음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage-1}">이전</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=1&name=${name}">처음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage-1}&name=${name}">이전</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item disabled"><a class="page-link">처음</a></li>		
@@ -79,8 +79,8 @@
 					<!-- other : 현재 페이지가 마지막 페이지 일 시 -->
 					<c:choose>
 						<c:when test="${currentPage < endPage}">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage+1}">다음</a></li>
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${endPage}">맨끝</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${currentPage+1}&name=${name}">다음</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/auth/ActorListServlet?currentPage=${endPage}&name=${name}">맨끝</a></li>
 						</c:when>
 						<c:otherwise>		
 							<li class="page-item disabled"><a class="page-link">다음</a></li>		
