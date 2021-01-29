@@ -7,6 +7,14 @@ public class Rental {
 	private int cusotomerId;
 	private String returnDate;
 	private int staffId;
+	private String customerName;
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 	public int getRentalId() {
 		return rentalId;
 	}

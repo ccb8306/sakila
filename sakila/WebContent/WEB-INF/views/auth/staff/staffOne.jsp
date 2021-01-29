@@ -22,7 +22,7 @@
 			<table class="table table-borderless">	
 				<tr>
 					<th style="width: 25%"><h2><br></h2></th>
-					<td class="align-right"><a class="btn btn-outline-dark" href="">정보 수정</a></td>
+					<td class="align-right"></td>
 				</tr>
 				<tr><td colspan="2"><hr></td></tr>
 				<tr>
@@ -54,7 +54,7 @@
 	</div>
 </div>
 <div class="over align-center">
-	<br><h1 class="font-lotte-H">관리자 정보</h1>
+	<br><h2 class="font-lotte-H">관리자 정보</h2>
 </div>
 </body>
 </html>

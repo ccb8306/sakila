@@ -1,6 +1,8 @@
 package sakila.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,7 +24,11 @@ public class AddFilmServlet extends HttpServlet {
 		FilmService filmService = new FilmService();
 		List<Language> languageList = filmService.getLanguageList();
 		List<Category> categoryList = filmService.getCategoryList();
-		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		String currentYear = sdf.format(date);
+
+		request.setAttribute("currentYear", currentYear);
 		request.setAttribute("categoryList", categoryList);
 		request.setAttribute("languageList", languageList);
 		request.getRequestDispatcher("/WEB-INF/views/auth/film/addFilm.jsp").forward(request, response);

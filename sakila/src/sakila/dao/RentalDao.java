@@ -28,6 +28,8 @@ public class RentalDao {
 			
 			rental.setRentalId(rs.getInt("r.rental_id"));
 			film.setTitle(rs.getString("f.title"));
+			rental.setCusotomerId(rs.getInt("cl.ID"));
+			rental.setCustomerName(rs.getString("cl.name"));
 			rental.setRentalDate(rs.getString("rental_date"));
 			film.setRentalDuration(rs.getInt("f.rental_duration"));
 			rental.setReturnDueDate(rs.getString("return_due_date"));
@@ -68,10 +70,11 @@ public class RentalDao {
 		
 		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle);
 		stmt.setInt(1, storeId);  // 상점아이디
-		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목 or 대여 id
-		stmt.setString(3, filmTitle); // 영화 제목 or 대여 id
-		stmt.setInt(4,(int)((currentPage -1) * rowPage));  // 페이징
-		stmt.setInt(5, rowPage); // 페이징	
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
+		stmt.setString(3, filmTitle); // 대여 id
+		stmt.setString(4, "%" + filmTitle + "%"); // 고객 이름
+		stmt.setInt(5,(int)((currentPage -1) * rowPage));  // 페이징
+		stmt.setInt(6, rowPage); // 페이징	
 		System.out.println(stmt + "<--select rentalList stmt");
 		
 		ResultSet rs = stmt.executeQuery();
@@ -81,6 +84,8 @@ public class RentalDao {
 			
 			rental.setRentalId(rs.getInt("r.rental_id"));
 			film.setTitle(rs.getString("f.title"));
+			rental.setCusotomerId(rs.getInt("cl.ID"));
+			rental.setCustomerName(rs.getString("cl.name"));
 			rental.setRentalDate(rs.getString("rental_date"));
 			film.setRentalDuration(rs.getInt("f.rental_duration"));
 			rental.setReturnDueDate(rs.getString("return_due_date"));
@@ -100,8 +105,9 @@ public class RentalDao {
 		
 		PreparedStatement stmt = conn.prepareStatement(RentalQuery.SELECT_RENTAL_LIST_BY_FilmTitle_COUNT);
 		stmt.setInt(1, storeId);
-		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목 or 대여 id
-		stmt.setString(3, filmTitle); // 영화 제목 or 대여 id
+		stmt.setString(2, "%" + filmTitle + "%"); // 영화 제목
+		stmt.setString(3, filmTitle); // 대여 id
+		stmt.setString(4, "%" + filmTitle + "%"); // 고객 이름
 		ResultSet rs = stmt.executeQuery();
 		
 		if(rs.next()) {

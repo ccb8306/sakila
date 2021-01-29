@@ -31,7 +31,7 @@
 			<!-- 검색 -->
 			<form action="${pageContext.request.contextPath}/auth/RentalListServlet" method="get">
 				<div style="width:50%; margin-left: auto;" class="input-group">
-						<input class="form-control" placeholder="Search Rental ID or Film Title" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
+						<input class="form-control" placeholder="Rental ID or Film Title or Customer Name" type="text" name="filmTitle" id="filmTitle" value="${filmTitle}">
 						<button type="submit" style="width:110px" class="btn btn-outline-dark">검색</button>
 				</div>
 			</form>
@@ -43,6 +43,7 @@
 						<tr>
 							<th>대여 ID</th>
 							<th>영화 제목</th>
+							<th>고객 이름</th>
 							<th>대여일</th>
 							<th>대여일수</th>
 							<th>반납 예정일</th>
@@ -54,6 +55,7 @@
 							<tr>
 								<td>${item.rental.rentalId}</td>
 								<td>${item.film.title}</td>
+								<td>${item.rental.customerName}</td>
 								<td>${item.rental.rentalDate}</td>
 								<td>${item.film.rentalDuration}일</td>
 								<td>${item.rental.returnDueDate}</td>
